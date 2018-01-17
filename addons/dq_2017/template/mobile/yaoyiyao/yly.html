@@ -170,8 +170,6 @@
             var status=document.getElementById("status");
             if(speed>shake){
                 count++;
-
-                sendCard();
 //                status.innerHTML = "你摇了中"+count+"次" ;
                 if(count>=20){
                     sendCard();
@@ -188,27 +186,33 @@
             function (data) {
 
                 var resdata = JSON.parse(data);
-                console.log(resdata);
-                wx.addCard({
-                    cardList: [
-                        {
-                            cardId: 'pSNdUwQGRQiDzeZFBWvdkXkHhzIU', //cardExt:"{'timestamp':'{$wxtimestamp}','signature':'{$wxsignature}'}"
-                            cardExt: '{"code": "","openid":"", "timestamp": "' + resdata.timestamp + '", "nonce_str":"' + resdata.noncestr + '","signature":"' + resdata.signature + '","outer_id": 1}'                            //cardExt: cardListStr
+
+                if(data.status==1)
+                {
+                    wx.addCard({
+                        cardList: [
+                            {
+                                cardId: 'pSNdUwQGRQiDzeZFBWvdkXkHhzIU', //cardExt:"{'timestamp':'{$wxtimestamp}','signature':'{$wxsignature}'}"
+                                cardExt: '{"code": "","openid":"", "timestamp": "' + resdata.timestamp + '", "nonce_str":"' + resdata.noncestr + '","signature":"' + resdata.signature + '","outer_id": 1}'                            //cardExt: cardListStr
+                            }
+                        ], // 需要添加的卡券列表
+                        success: function (res) {
+                            var cardList = res.cardList;
+//                        window.location.href = window.location.href + "&rand=" + Math.random();
+                        },
+                        cancel: function (res) {
+//                        window.location.href = window.location.href + "&rand=" + Math.random();
+                            console.log("执行cancel");
+                        },
+                        fail: function (res) {
+                            window.location.href = window.location.href + "&rand=" + Math.random();
+                            console.log("执行fail");
                         }
-                    ], // 需要添加的卡券列表
-                    success: function (res) {
-                        var cardList = res.cardList;
-//                        window.location.href = window.location.href + "&rand=" + Math.random();
-                    },
-                    cancel: function (res) {
-//                        window.location.href = window.location.href + "&rand=" + Math.random();
-                        console.log("执行cancel");
-                    },
-                    fail: function (res) {
-//                        window.location.href = window.location.href + "&rand=" + Math.random();
-                        console.log("执行fail");
-                    }
-                });
+                    });
+                }else{
+                    alert('没zhongjiang !');
+                }
+
             }
         );
     }

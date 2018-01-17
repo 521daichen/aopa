@@ -11,6 +11,15 @@ class Dq_2017ModuleSite extends WeModuleSite {
 
 
 
+    protected function getReword()
+    {
+        if(rand(0,10)>5){
+            return true;
+        }else{
+            return false;
+        }
+    }
+
 
     public function doMobileAopaCardSignInfo(){
         global $_W;
@@ -32,9 +41,9 @@ class Dq_2017ModuleSite extends WeModuleSite {
         }
         $sign=sha1($return);
 
-        $shareFun = $this->doMobileNewYearShare();
+        $isreword = $this->getReword();
 
-        if($shareFun){
+        if($isreword){
             $res=array(
                 'status'=>1,
                 'timestamp'=>$timestamp,
