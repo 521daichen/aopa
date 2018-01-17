@@ -118,7 +118,7 @@ class Dq_2017ModuleSite extends WeModuleSite {
 
     public function doMobileYaoyiyao()
     {
-        $this->template('yaoyiyao/yly');
+        include $this->template('yaoyiyao/yly');
     }
 
 
