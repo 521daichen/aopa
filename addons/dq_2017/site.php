@@ -114,6 +114,16 @@ class Dq_2017ModuleSite extends WeModuleSite {
 
 
 
+    //摇一摇begin
+
+    public function doMobileYaoyiyao()
+    {
+        $this->template('yaoyiyao/yly');
+    }
+
+
+
+    //摇一摇end
 
 
 
@@ -1473,7 +1483,7 @@ class Dq_2017ModuleSite extends WeModuleSite {
 
         return $dcdyr_ticket['ticket'];
     }
-    
+
     //获取用户地理位置
     public function doMobileGetLocation(){
         $ip=$_POST['userip'];
