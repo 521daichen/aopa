@@ -1473,19 +1473,7 @@ class Dq_2017ModuleSite extends WeModuleSite {
 
         return $dcdyr_ticket['ticket'];
     }
-    /*
-     * 随机字符串
-     */
-    public function generateNonceStr($length=16){
-        // 密码字符集，可任意添加你需要的字符
-        $chars = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
-        $str = "";
-        for($i = 0; $i < $length; $i++)
-        {
-            $str .= $chars[mt_rand(0, strlen($chars) - 1)];
-        }
-        return $str;
-    }
+    
     //获取用户地理位置
     public function doMobileGetLocation(){
         $ip=$_POST['userip'];
