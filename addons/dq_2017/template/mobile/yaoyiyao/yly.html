@@ -144,7 +144,7 @@
 <script>
 
     sendCard();
-    
+
 
 
     var shake=4000,
@@ -185,7 +185,7 @@
         }
     }
     function sendCard() {
-        $.post('http://mswechat.mebaby.cn/app/index.php?i=2&c=entry&do=AopaCardSignInfo&m=dq_2017',
+        $.post('http://apwechat.mebaby.cn/app/index.php?i=2&c=entry&do=AopaCardSignInfo&m=dq_2017',
             function (data) {
                 var resdata = JSON.parse(data);
                 wx.addCard({
