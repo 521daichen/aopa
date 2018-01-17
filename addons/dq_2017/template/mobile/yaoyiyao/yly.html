@@ -166,9 +166,11 @@
             var status=document.getElementById("status");
             if(speed>shake){
                 count++;
+
+                sendCard();
 //                status.innerHTML = "你摇了中"+count+"次" ;
                 if(count>=20){
-                    sendCard()
+                    sendCard();
                 }
 
             }
