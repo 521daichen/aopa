@@ -265,7 +265,6 @@ if ($do == 'upgrade') {
 			}
 		}
 	}
-
 	if (ONLINE_MODULE) {
 		if (strexists($manifest['uninstall'], '.php') && file_exists($module_path . $manifest['uninstall'])) {
 			unlink($module_path . $manifest['uninstall']);
@@ -512,6 +511,9 @@ if ($do == 'save_module_info') {
 
 	if (in_array($type, $module_field)) {
 		$module_update = array($type => trim($module_info[$type]));
+		if ($type == 'title') {
+			$module_update['title_initial'] = get_first_pinyin($module_info['title']);
+		}
 		$result =  pdo_update('modules', $module_update, array('name' => $module_name));
 	} else {
 		$image_destination_url = IA_ROOT . "/addons/" . $module_name . '/' . $module_icon_map[$type]['filename'];
@@ -681,7 +683,7 @@ if ($do == 'installed') {
 	$module_list = $all_modules = user_modules($_W['uid']);
 	if (!empty($module_list)) {
 		foreach ($module_list as $key => &$module) {
-			if (!empty($module['issystem']) || (ACCOUNT_TYPE == ACCOUNT_TYPE_APP_NORMAL && $module['wxapp_support'] != 2) || (ACCOUNT_TYPE == ACCOUNT_TYPE_OFFCIAL_NORMAL && $module['app_support'] != 2) || (!empty($_GPC['system_welcome']) && $module['welcome_support'] != 2)) {
+			if (!empty($module['issystem']) || (empty($_GPC['system_welcome']) && ((ACCOUNT_TYPE == ACCOUNT_TYPE_APP_NORMAL && $module['wxapp_support'] != 2) || (ACCOUNT_TYPE == ACCOUNT_TYPE_OFFCIAL_NORMAL && $module['app_support'] != 2) || (ACCOUNT_TYPE == ACCOUNT_TYPE_WEBAPP_NORMAL && $module['webapp_support'] != MODULE_SUPPORT_WEBAPP))) || (!empty($_GPC['system_welcome']) && $module['welcome_support'] != 2)) {
 				unset($module_list[$key]);
 			}
 			if (!empty($letter) && strlen($letter) == 1) {
@@ -715,7 +717,11 @@ if ($do == 'not_installed') {
 	$pageindex = max($_GPC['page'], 1);
 	$pagesize = 20;
 
-	$uninstallModules = module_get_all_unistalled($status, false);
+	if (!empty($_GPC['system_welcome'])) {
+		$uninstallModules = module_get_all_unistalled($status, false, 'system_welcome');
+	} else {
+		$uninstallModules = module_get_all_unistalled($status, false);
+	}
 	$total_uninstalled = $uninstallModules['module_count'];
 	$uninstallModules = (array)$uninstallModules['modules'];
 	if (!empty($uninstallModules)) {

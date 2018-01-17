@@ -22,6 +22,9 @@ class DB {
 	public function __construct($name = 'master') {
 		global $_W;
 		$this->cfg = $_W['config']['db'];
+				unset($_W['config']['db']);
+		$_W['config']['db']['tablepre'] = $this->cfg['tablepre'];
+		$_W['config']['db']['slave_status'] = $this->cfg['slave_status'];
 		$this->connect($name);
 	}
 
@@ -640,8 +643,7 @@ class SqlPaser {
 		foreach ($field as $field_row) {
 			if (strexists($field_row, '*')) {
 				if (!strexists(strtolower($field_row), 'as')) {
-					$field_row .= " AS '{$index}'";
-				}
+														}
 			} elseif (strexists(strtolower($field_row), 'select')) {
 								if ($field_row[0] != '(') {
 					$field_row = "($field_row) AS '{$index}'";
@@ -666,14 +668,18 @@ class SqlPaser {
 			return $limitsql;
 		}
 		if (is_array($limit)) {
-			$limit[0] = max(intval($limit[0]), 1);
-			!empty($limit[1]) && $limit[1] = max(intval($limit[1]), 1);
-			if (empty($limit[0]) && empty($limit[1])) {
-				$limitsql = '';
-			} elseif (!empty($limit[0]) && empty($limit[1])) {
-				$limitsql = " LIMIT " . $limit[0];
+						if (empty($limit[0]) && !empty($limit[1])) {
+				$limitsql = " LIMIT " . $limit[1];
 			} else {
-				$limitsql = " LIMIT " . ($inpage ? ($limit[0] - 1) * $limit[1] : $limit[0]) . ', ' . $limit[1];
+				$limit[0] = max(intval($limit[0]), 1);
+				!empty($limit[1]) && $limit[1] = max(intval($limit[1]), 1);
+				if (empty($limit[0]) && empty($limit[1])) {
+					$limitsql = '';
+				} elseif (!empty($limit[0]) && empty($limit[1])) {
+					$limitsql = " LIMIT " . $limit[0];
+				} else {
+					$limitsql = " LIMIT " . ($inpage ? ($limit[0] - 1) * $limit[1] : $limit[0]) . ', ' . $limit[1];
+				}
 			}
 		} else {
 			$limit = trim($limit);

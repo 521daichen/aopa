@@ -8,6 +8,23 @@ defined('IN_IA') or exit('Access Denied');
 
 class AccountTable extends We7Table {
 
+	protected $tableName = 'uni_account';
+	protected $primaryKey = 'acid';
+	
+	public function baseaccount() {
+		return $this->hasOne('baseaccount', 'acid', 'default_acid');
+	}
+
+	
+	public function menus() {
+		return $this->hasMany('menu', 'uniacid', 'uniacid');
+	}
+
+	
+	public function unigroup() {
+		return $this->belongsMany('unigroup', 'id', 'uniacid', 'uni_account_group', 'groupid' ,'uniacid');
+	}
+
 	public function searchAccountList($expire = false) {
 		global $_W;
 		$this->query->from('uni_account', 'a')->select('a.uniacid')->leftjoin('account', 'b')
@@ -24,7 +41,7 @@ class AccountTable extends We7Table {
 			$this->searchWithExprie();
 		}
 		$this->accountUniacidOrder();
-		$list = $this->query->getall('a.uniacid');
+		$list = $this->query->getall('uniacid');
 		return $list;
 	}
 
@@ -47,7 +64,7 @@ class AccountTable extends We7Table {
 	
 	public function accountWechatsInfo($uniacids, $uid) {
 		return $this->query->from('uni_account', 'a')
-				->leftjoin(uni_account_tablename(ACCOUNT_TYPE_OFFCIAL_NORMAL), 'w')
+				->leftjoin('account_wechats', 'w')
 				->on(array('w.uniacid' => 'a.uniacid'))
 				->leftjoin('uni_account_users', 'au')
 				->on(array('a.uniacid' => 'au.uniacid'))
@@ -60,7 +77,20 @@ class AccountTable extends We7Table {
 	
 	public function accountWxappInfo($uniacids, $uid) {
 		return $this->query->from('uni_account', 'a')
-				->leftjoin(uni_account_tablename(ACCOUNT_TYPE_APP_NORMAL), 'w')
+				->leftjoin('account_wxapp', 'w')
+				->on(array('w.uniacid' => 'a.uniacid'))
+				->leftjoin('uni_account_users', 'au')
+				->on(array('a.uniacid' => 'au.uniacid'))
+				->where(array('a.uniacid' => $uniacids))
+				->where(array('au.uid' => $uid))
+				->orderby('a.uniacid', 'asc')
+				->getall('acid');
+	}
+
+	
+	public function accountWebappInfo($uniacids, $uid) {
+		return $this->query->from('uni_account', 'a')
+				->leftjoin('account_webapp', 'w')
 				->on(array('w.uniacid' => 'a.uniacid'))
 				->leftjoin('uni_account_users', 'au')
 				->on(array('a.uniacid' => 'au.uniacid'))
@@ -114,9 +144,63 @@ class AccountTable extends We7Table {
 		global $_W;
 		if (user_is_founder($_W['uid']) && !user_is_vice_founder()) {
 			$this->query->leftjoin('uni_account_users', 'c')->on(array('a.uniacid' => 'c.uniacid'));
+			$this->query->leftjoin('users', 'u')->on(array('c.uid' => 'u.uid'))
+				->where('c.role', 'owner')->where('u.endtime !=', 0)->where('u.endtime <', TIMESTAMP);
 		}
-		$this->query->leftjoin('users', 'u')->on(array('c.uid' => 'u.uid'))
-					->where('c.role', 'owner')->where('u.endtime !=', 0)->where('u.endtime <', TIMESTAMP);
+
 		return $this;
+	}
+
+	public function getWechatappAccount($acid) {
+		return $this->query->from('account_wechats')->where('acid', $acid)->get();
+	}
+
+	public function getWxappAccount($acid) {
+		return $this->query->from('account_wxapp')->where('acid', $acid)->get();
+	}
+
+	public function getWebappAccount($acid) {
+		return $this->query->from('account_webapp')->where('acid', $acid)->get();
+	}
+
+	public function getUniAccountByAcid($acid) {
+		$account = $this->query->from('account')->where('acid', $acid)->get();
+		$uniaccount = array();
+		if (!empty($account)) {
+			$uniaccount = $this->query->from('uni_account')->where('uniacid', $account['uniacid'])->get();
+		}
+		if (empty($account)) {
+			return array();
+		} else {
+			return array_merge($account, $uniaccount);
+		}
+	}
+
+	public function getUniAccountByUniacid($uniacid) {
+		$account = $this->getAccountByUniacid($uniacid);
+		$uniaccount = array();
+		if (!empty($account)) {
+			$uniaccount = $this->query->from('uni_account')->where('uniacid', $account['uniacid'])->get();
+		}
+		if (empty($account)) {
+			return array();
+		} else {
+			return !empty($uniaccount) && is_array($uniaccount) ? array_merge($account, $uniaccount) : $account;
+		}
+	}
+
+	public function getAccountOwner($uniacid) {
+		if (empty($uniacid)) {
+			return array();
+		}
+		$owneruid = $this->query->from('uni_account_users')->where(array('uniacid' => $uniacid, 'role' => ACCOUNT_MANAGE_NAME_OPERATOR))->getcolumn('uid');
+		if (empty($owneruid)) {
+			return array();
+		}
+		return table('users')->usersInfo($owneruid);
+	}
+
+	public function getAccountByUniacid($uniacid) {
+		return $this->query->from('account')->where('uniacid', $uniacid)->get();
 	}
 }

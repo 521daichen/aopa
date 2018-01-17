@@ -7,13 +7,18 @@
 
 defined('IN_IA') or exit('Access Denied');
 load()->classs('cloudapi');
-if($do == 'display') { 	$siteurl = $_W['siteroot'];
+load()->model('message');
+
+if($do == 'display') { 	$message_id = safe_gpc_int($_GPC['message_id']);
+	message_notice_read($message_id);
+	$siteurl = $_W['siteroot'];
 	$cloud = new CloudApi();
+	$uuid = $_GPC['uuid'];
 	$data = $cloud->get('system','workorder', array('do'=>'siteworkorder'), 'json');
 	if(is_error($data)) {
 		itoast('无权限进入工单系统');
 	}
-	$iframe_url = $data['data']['url'].'&from='.urlencode($siteurl);
+	$iframe_url = $data['data']['url'].'&from='.urlencode($siteurl).'&uuid='.$uuid;
 	template('system/workorder');
 }
 

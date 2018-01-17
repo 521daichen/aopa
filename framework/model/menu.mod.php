@@ -162,6 +162,9 @@ function menu_update_currentself() {
 	if (is_error($default_menu_info)) {
 		return error(-1, $default_menu_info['message']);
 	}
+	if (empty($default_menu_info['is_menu_open']) || empty($default_menu_info['selfmenu_info'])) {
+		return true;
+	}
 	$default_menu = $default_menu_info['selfmenu_info'];
 	$default_sub_button = array();
 	if (!empty($default_menu['button'])) {
@@ -248,11 +251,11 @@ function menu_update_conditional() {
 				'status' => STATUS_ON,
 			);
 			if (!empty($menu['matchrule'])) {
-				$menu_id = table('menu')->accountMenuInfo(array('uniacid' => $_W['uniacid'], 'menuid' => $menu['menuid'], 'type' => MENU_CONDITIONAL));
-				$menu_id = $menu_id['id'];
+				$menu_info = table('menu')->accountMenuInfo(array('uniacid' => $_W['uniacid'], 'menuid' => $menu['menuid'], 'type' => MENU_CONDITIONAL));
+				$menu_id = $menu_info['id'];
 			}
 			if (!empty($menu_id)) {
-				$data['title'] = '个性化菜单_' . $menu_id;
+				$data['title'] = !empty($menu_info['title']) ? $menu_info['title'] : '个性化菜单_' . $menu_id;
 				pdo_update('uni_account_menus', $data, array('uniacid' => $_W['uniacid'], 'id' => $menu_id));
 			} else {
 				pdo_insert('uni_account_menus', $data);

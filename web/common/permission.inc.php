@@ -162,14 +162,17 @@ $we7_file_permission = array(
 		'manager' => array(
 			'cover',
 			'reply',
+			'material'
 		),
 		'operator' => array(
 			'cover',
 			'reply',
+			'material'
 		),
 		'clerk' => array(
 			'reply',
 			'cover',
+			'material'
 		)
 	),
 	'profile' => array(
@@ -326,10 +329,7 @@ $we7_file_permission = array(
 		),
 		'operator' => array(
 			'emulator',
-		),
-		'owner' => array(),
-		'manager' => array(),
-		'operator' => array(),
+		)
 	),
 	'append' => array('append*'),
 	'see_more_info' => array(
@@ -345,15 +345,21 @@ $we7_file_permission = array(
 			'see_account_manage_module_tpl_all_permission',
 			'see_account_manage_sms_blance',
 			'see_account_manage_users_edit',
+			'see_account_manage_users_adduser',
+			'see_account_manage_users_add_viceuser',
 			'see_system_upgrade',
 			'see_system_manage_clerk',
 			'see_system_manage_user_setting',
 			'see_system_manage_vice_founder',
 			'see_system_add_vice_founder',
 			'see_notice_post',
+			'see_module_manage_system_newversion',
+			'see_user_edit_base_founder_name',
+			'see_user_create_own_vice_founder'
 		),
 		'vice_founder' => array(
-
+			'see_account_manage_users_adduser',
+			'see_module_manage_system_group_add',
 		),
 		'owner' => array(
 

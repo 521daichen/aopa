@@ -20,16 +20,17 @@ $account_info = permission_user_account_num();
 
 
 if ($do == 'display') {
-	$message_id = $_GPC['message_id'];
+	$message_id = safe_gpc_int($_GPC['message_id']);
 	message_notice_read($message_id);
 
 	$pindex = max(1, intval($_GPC['page']));
 	$psize = 20;
-
+	
 	$account_table = table('account');
 	
 	$type_condition = array(
 		ACCOUNT_TYPE_APP_NORMAL => array(ACCOUNT_TYPE_APP_NORMAL),
+		ACCOUNT_TYPE_WEBAPP_NORMAL => array(ACCOUNT_TYPE_WEBAPP_NORMAL),
 		ACCOUNT_TYPE_OFFCIAL_NORMAL => array(ACCOUNT_TYPE_OFFCIAL_NORMAL, ACCOUNT_TYPE_OFFCIAL_AUTH),
 	);
 	$account_table->searchWithType($type_condition[ACCOUNT_TYPE]);
@@ -61,6 +62,7 @@ if ($do == 'display') {
 
 	foreach($list as &$account) {
 		$account = uni_fetch($account['uniacid']);
+		$account['end'] = $account['endtime'] == 0 ? '永久' : date('Y-m-d', $account['starttime']) . '~'. date('Y-m-d', $account['endtime']);
 		$account['role'] = permission_account_user_role($_W['uid'], $account['uniacid']);
 	}
 

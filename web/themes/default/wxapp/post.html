@@ -39,7 +39,7 @@
 									<i class="num">3</i>
 									<div class="wxapp-step-name">
 										<img src="./resource/images/creat-step-3.png"/>
-										<p>底部导航</p>
+											<p>底部导航</p>
 									</div>
 								</a>
 							</li>
@@ -109,9 +109,26 @@
 									<div class="form-group">
 										<label for="" class="control-label col-sm-2">版本号</label>
 										<div class="form-controls col-sm-10">
-											<input type="text" name="version" ng-model="wxappinfo.version" class="form-control wxapp-name" placeholder="版本号，只能是字母、数字、点，例如 v1.0.1">
+											<input type="text" name="version" ng-model="wxappinfo.version" class="form-control wxapp-name" placeholder="只能是数字、点，数字最多两位，例如1.01或1.1">
 										</div>
 									</div>
+									{if $create_type == WXAPP_CREATE_MODULE || $create_type == WXAPP_CREATE_MUTI_MODULE}
+									<div class="form-group">
+										<input type="hidden" name="modules" value="">
+										<label class="control-label col-sm-2">添加应用</label>
+										<div class="form-controls col-sm-10">
+
+												<ul class="app-list" id="resource_module">
+													<div class="app-info" ng-repeat="module in wxappinfo.choose.modules">
+														<img ng-src="{{module.icon}}" />
+														<p>{{module.title}}</p>
+													</div>
+													<li class="select select-more"></li>
+												</ul>
+
+										</div>
+									</div>
+									{else}
 									<div class="form-group">
 										<input type="hidden" name="modules" value="">
 										<label class="control-label col-sm-2">添加应用</label>
@@ -119,6 +136,7 @@
 											<div we7-choose-more we7-modules="wxappinfo.choose.modules" we7-choose-single="{php echo $design_method == WXAPP_MODULE}"></div>
 										</div>
 									</div>
+									{/if}
 								</div>
 							</div>
 							<div id="home" ng-show="createStep == 2">
@@ -183,10 +201,20 @@
 								</div>
 							</div>
 							<div id="bottom" ng-show="createStep == 3">
+
 								<div class="wxapp-tem-preview wxapp-buttom-preview">
 									<div class="wxapp-phone">
 										<img src="./resource/images/iphone6.png" alt="" class="wxapp-phone-bg" />
 										<div class="wxapp-home-preview">
+											<div class="box clearfix">
+												<div class="item pic" ng-repeat="module in wxappinfo.choose.modules">
+													<a href="javascript:void(0)">
+														<i style="background-image:url({{module.icon}});"></i>
+														<div class="name">{{module.title}}</div>
+													</a>
+												</div>
+
+											</div>
 											<div class="buttom-list-preview" ng-style="{'background-color': wxappinfo.quickmenu.bottom.bgcolor}">
 												<ul ng-style="{'border-top': '1px solid'+wxappinfo.quickmenu.bottom.boundary}">
 													<li ng-repeat="menu in wxappinfo.quickmenu.menus">
@@ -198,9 +226,10 @@
 										</div>
 									</div>
 								</div>
+
 								<div class="creat-buttom">
 									<div class="buttom-heading">
-										底部菜单
+										配置
 									</div>
 									<div class="creat-buttom-select form-defalut">
 										<div class="form-group">
@@ -235,16 +264,7 @@
 												<div we7-colorpicker we7-my-color="wxappinfo.quickmenu.bottom.selectedColor" we7-my-default-color="wxappinfo.quickmenu.bottom.selectedColor"></div>
 											</div>
 										</div>
-										<!-- <td>
-											<div class="buttom-default-color">
-												<div we7-colorpicker we7-my-color="menu.defaultColor" we7-my-default-color="menu.defaultColor"></div>
-											</div>
-										</td>
-										<td>
-											<div class="buttom-default-color">
-												<div we7-colorpicker we7-my-color="menu.selectedColor" we7-my-default-color="menu.selectedColor"></div>
-											</div>
-										</td> -->
+
 									</div>
 									<div class="buttom-list">
 										<table class="table we7-table buttom-list-table vertical-middle">
@@ -265,22 +285,22 @@
 													<div class="nav-img-box">
 														<img ng-src="{{menu.defaultImage}}" >
 														<div ng-click="addDefaultImg($index)" class="select">选择</div>
-														
+
 													</div>
 												</td>
 												<td>
 													<div class="nav-img-box">
 														<img ng-src="{{menu.selectedImage}}">
 														<div ng-click="addSelectedImg($index)" class="select">选择</div>
-														
+
 													</div>
 												</td>
 												<td>
 													<input type="text" name="menuname" ng-model="menu.name" class="form-control" />
 												</td>
-												
+
 												<td>
-													<select class="form-control" id="lineheight" ng-model="menu.module" ng-options="menu.title group by menu.module for menu in moduleEntries">
+													<select class="form-control" id="lineheight" ng-model="menu.defaultentry" ng-options="binding.title group by binding.modulename for binding in module_bindings">
 													</select>
 												</td>
 												<td>
@@ -289,6 +309,37 @@
 											</tr>
 											<tr class="buttom-more">
 												<td colspan="5"><a href="javascript:;" class="buttom-add" ng-click="addMenu()">+</a></td>
+											</tr>
+										</table>
+									</div>
+									<div class="buttom-list">
+										<table class="table we7-table buttom-list-table vertical-middle">
+											<col width="70" />
+											<col width="70" />
+											<col width="120" />
+											<tr>
+												<th>默认</th>
+												<th>模块名</th>
+												<th>跳转到</th>
+											</tr>
+											<tr ng-repeat="module in wxappinfo.choose.modules" class="we7-form">
+												<td>
+													<div class="nav-img-box">
+														<img ng-src="{{module.newicon ? module.newicon : module.icon}}" >
+														<div ng-click="addModuleImage(module)" class="select">选择</div>
+
+													</div>
+												</td>
+												<td>
+													<input type="text" name="modulename" ng-model="module.title" class="form-control" readonly />
+												</td>
+												<td>
+													<select class="form-control" id="lineheight1"
+													        ng-model="module.defaultentry"
+													        ng-options="binding.eid as binding.title for binding in module.bindings">
+													</select>
+												</td>
+
 											</tr>
 										</table>
 									</div>
@@ -377,13 +428,25 @@
 <script>
 
 require(['fileUploader','underscore'], function(uploader){
+
+	var isedit = {$isedit};
+	var wxappinfo = {'name' : '{$wxapp_info['name']}'};
+	if (isedit) {
+		wxappinfo.modules = {php echo json_encode($wxapp_version['modules'])};
+		wxappinfo.quickmenu = {php echo json_encode($wxapp_version['quickmenu'])};
+		wxappinfo.version = '{$wxapp_version['version']}';
+		wxappinfo.description = '{$wxapp_version['description']}';
+	}
+
 	angular.module('wxApp').value('config', {
-		'wxappinfo' : {
-			'name' : '{$wxapp_info['name']}'
-		},
+		'wxappinfo' : wxappinfo,
 		'uniacid' : "{$uniacid}",
+		'version_id' : "{$version_id}",
+		'create_type' : "{$create_type}",
+		'isedit' : isedit,
 		'designMethod' : "{$design_method}",
-		'wxappPostUrl' : "{php echo url('wxapp/post', array('design_method' => $design_method))}",
+		'bindingsUrl' : "{php echo url('wxapp/post/module_binding')}",
+		'wxappPostUrl' : "{php echo url('wxapp/post', array('design_method' => $design_method, 'create_type'=>$create_type, 'version_id' => $version_id))}",
 		'token' : "{$_W['token']}",
 	});
 	angular.bootstrap($('#js-wxapp-create'), ['wxApp']);

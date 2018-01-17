@@ -157,9 +157,8 @@ function cache_build_frame_menu() {
 		$system_displayoder = 1;
 		foreach ($system_menu as $menu_name => $menu) {
 			$system_menu[$menu_name]['is_system'] = true;
-			$system_menu[$menu_name]['is_display'] = empty($system_menu_db[$menu_name]) || !empty($system_menu_db[$menu_name]['is_display']) ? true : false;
+			$system_menu[$menu_name]['is_display'] = !empty($system_menu_db[$menu_name]['is_display']) ? true : ((isset($system_menu[$menu_name]['is_display']) && empty($system_menu[$menu_name]['is_display']) || !empty($system_menu_db[$menu_name])) ? false : true);
 			$system_menu[$menu_name]['displayorder'] = !empty($system_menu_db[$menu_name]) ? intval($system_menu_db[$menu_name]['displayorder']) : ++$system_displayoder;
-
 			foreach ($menu['section'] as $section_name => $section) {
 				$displayorder = max(count($section['menu']), 1);
 
@@ -288,10 +287,12 @@ function cache_build_uninstalled_module() {
 			$upgrade_support_module = false;
 			$wxapp_support = !empty($module['site_branch']['wxapp_support']) && is_array($module['site_branch']['bought']) && in_array('wxapp', $module['site_branch']['bought']) ? $module['site_branch']['wxapp_support'] : 1;
 			$app_support = !empty($module['site_branch']['app_support']) && is_array($module['site_branch']['bought']) && in_array('app', $module['site_branch']['bought']) ? $module['site_branch']['app_support'] : 1;
-			if ($wxapp_support ==  1 && $app_support == 1) {
-				$app_support = 2;
+			$webapp_support = !empty($module['site_branch']['webapp_support']) && is_array($module['site_branch']['bought']) && in_array('webapp', $module['site_branch']['bought']) ? $module['site_branch']['webapp_support'] : MODULE_NOSUPPORT_WEBAPP;
+			$welcome_support = !empty($module['site_branch']['system_welcome_support']) && is_array($module['site_branch']['bought']) && in_array('system_welcome', $module['site_branch']['bought']) ? $module['site_branch']['system_welcome_support'] : MODULE_NONSUPPORT_SYSTEMWELCOME;
+			if ($wxapp_support ==  MODULE_NONSUPPORT_WXAPP && $app_support == MODULE_NONSUPPORT_ACCOUNT && $webapp_support == MODULE_NOSUPPORT_WEBAPP && $welcome_support == MODULE_NONSUPPORT_SYSTEMWELCOME) {
+				$app_support = MODULE_SUPPORT_ACCOUNT;
 			}
-			if (!empty($installed_module[$module['name']]) && ($installed_module[$module['name']]['app_support'] != $app_support || $installed_module[$module['name']]['wxapp_support'] != $wxapp_support)) {
+			if (!empty($installed_module[$module['name']]) && ($installed_module[$module['name']]['app_support'] != $app_support || $installed_module[$module['name']]['wxapp_support'] != $wxapp_support || $installed_module[$module['name']]['webapp_support'] != $webapp_support || $installed_module[$module['name']]['welcome_support'] != $welcome_support)) {
 				$upgrade_support_module = true;
 			}
 			if (!in_array($module['name'], array_keys($installed_module)) || $upgrade_support_module) {
@@ -305,22 +306,36 @@ function cache_build_uninstalled_module() {
 						'thumb' => $module['thumb'],
 						'wxapp_support' => $wxapp_support,
 						'app_support' => $app_support,
+						'webapp_support' => $webapp_support,
+						'welcome_support' => $welcome_support,
 						'main_module' => empty($module['main_module']) ? '' : $module['main_module'],
 						'upgrade_support' => $upgrade_support_module
 					);
 					if ($upgrade_support_module) {
-						if ($wxapp_support == 2 && $installed_module[$module['name']]['wxapp_support'] != 2) {
+						if ($wxapp_support == MODULE_SUPPORT_WXAPP && $installed_module[$module['name']]['wxapp_support'] != MODULE_SUPPORT_WXAPP) {
 							$uninstallModules[$status]['wxapp'][$module['name']] = $cloud_module_info;
 						}
-						if ($app_support == 2 && $installed_module[$module['name']]['app_support'] != 2) {
+						if ($app_support == MODULE_SUPPORT_ACCOUNT && $installed_module[$module['name']]['app_support'] != MODULE_SUPPORT_ACCOUNT) {
 							$uninstallModules[$status]['app'][$module['name']] = $cloud_module_info;
+						}
+						if ($webapp_support == MODULE_SUPPORT_WEBAPP && $installed_module[$module['name']]['webapp_support'] != MODULE_SUPPORT_WEBAPP) {
+							$uninstallModules[$status]['webapp'][$module['name']] = $cloud_module_info;
+						}
+						if ($welcome_support == MODULE_SUPPORT_SYSTEMWELCOME && $installed_module[$module['name']]['welcome_support'] != MODULE_SUPPORT_SYSTEMWELCOME) {
+							$uninstallModules[$status]['system_welcome'][$module['name']] = $cloud_module_info;
 						}
 					} else {
-						if ($wxapp_support == 2) {
+						if ($wxapp_support == MODULE_SUPPORT_WXAPP) {
 							$uninstallModules[$status]['wxapp'][$module['name']] = $cloud_module_info;
 						}
-						if ($app_support == 2) {
+						if ($app_support == MODULE_SUPPORT_WXAPP) {
 							$uninstallModules[$status]['app'][$module['name']] = $cloud_module_info;
+						}
+						if ($webapp_support == MODULE_SUPPORT_WEBAPP) {
+							$uninstallModules[$status]['webapp'][$module['name']] = $cloud_module_info;
+						}
+						if ($welcome_support == MODULE_SUPPORT_SYSTEMWELCOME) {
+							$uninstallModules[$status]['system_welcome'][$module['name']] = $cloud_module_info;
 						}
 					}
 				}
@@ -333,6 +348,9 @@ function cache_build_uninstalled_module() {
 	$module_file = glob($path . '*');
 	if (is_array($module_file) && !empty($module_file)) {
 		foreach ($module_file as $modulepath) {
+			if (!is_dir($modulepath)) {
+				continue;
+			}
 			$upgrade_support_module = false;
 			$modulepath = str_replace($path, '', $modulepath);
 			$manifest = ext_module_manifest($modulepath);
@@ -341,7 +359,7 @@ function cache_build_uninstalled_module() {
 			}
 			$main_module = empty($manifest['platform']['main_module']) ? '' : $manifest['platform']['main_module'];
 			$manifest = ext_module_convert($manifest);
-			if (!empty($installed_module[$modulepath]) && ($manifest['app_support'] != $installed_module[$modulepath]['app_support'] || $manifest['wxapp_support'] != $installed_module[$modulepath]['wxapp_support'])) {
+			if (!empty($installed_module[$modulepath]) && ($manifest['app_support'] != $installed_module[$modulepath]['app_support'] || $manifest['wxapp_support'] != $installed_module[$modulepath]['wxapp_support'] || $manifest['welcome_support'] != $installed_module[$modulepath]['welcome_support'])) {
 				$upgrade_support_module = true;
 			}
 			if (!in_array($manifest['name'], array_keys($installed_module)) || $upgrade_support_module) {
@@ -353,10 +371,12 @@ function cache_build_uninstalled_module() {
 					'title' => $manifest['title'],
 					'app_support' => $manifest['app_support'],
 					'wxapp_support' => $manifest['wxapp_support'],
+					'webapp_support' => $manifest['webapp_support'],
+					'welcome_support' => $manifest['welcome_support'],
 					'main_module' => $main_module,
 					'upgrade_support' => $upgrade_support_module
 				);
-				$module_type = in_array($manifest['name'], $recycle_modules) ? 'recycle' : 'uninstalled';
+				$module_type = !empty($recycle_modules[$manifest['name']]) ? 'recycle' : 'uninstalled';
 				if ($upgrade_support_module) {
 					if ($module_info['app_support'] == 2 && $installed_module[$module_info['name']]['app_support'] != 2) {
 						$uninstallModules['uninstalled']['app'][$manifest['name']] = $module_info;
@@ -364,12 +384,24 @@ function cache_build_uninstalled_module() {
 					if ($module_info['wxapp_support'] == 2 && $installed_module[$module_info['name']]['wxapp_support'] != 2) {
 						$uninstallModules['uninstalled']['wxapp'][$manifest['name']] = $module_info;
 					}
+					if ($module_info['webapp_support'] == MODULE_SUPPORT_WEBAPP && $installed_module[$module_info['name']]['webapp_support'] != MODULE_SUPPORT_WEBAPP) {
+						$uninstallModules['uninstalled']['webapp'][$manifest['name']] = $module_info;
+					}
+					if ($module_info['welcome_support'] == MODULE_SUPPORT_SYSTEMWELCOME && $installed_module[$module_info['name']]['welcome_support'] != MODULE_SUPPORT_SYSTEMWELCOME) {
+						$uninstallModules['uninstalled']['system_welcome'][$manifest['name']] = $module_info;
+					}
 				} else {
 					if ($module_info['app_support'] == 2) {
 						$uninstallModules[$module_type]['app'][$manifest['name']] = $module_info;
 					}
 					if ($module_info['wxapp_support'] == 2) {
 						$uninstallModules[$module_type]['wxapp'][$manifest['name']] = $module_info;
+					}
+					if ($module_info['webapp_support'] == MODULE_SUPPORT_WEBAPP) {
+						$uninstallModules[$module_type]['webapp'][$manifest['name']] = $module_info;
+					}
+					if ($module_info['welcome_support'] == MODULE_SUPPORT_SYSTEMWELCOME) {
+						$uninstallModules[$module_type]['system_welcome'][$manifest['name']] = $module_info;
 					}
 				}
 			}
@@ -379,7 +411,9 @@ function cache_build_uninstalled_module() {
 		'cloud_m_count' => $cloud_m_count['module_quantity'],
 		'modules' => $uninstallModules,
 		'app_count' => count($uninstallModules['uninstalled']['app']),
-		'wxapp_count' => count($uninstallModules['uninstalled']['wxapp'])
+		'wxapp_count' => count($uninstallModules['uninstalled']['wxapp']),
+		'webapp_count' => count($uninstallModules['uninstalled']['webapp']),
+		'welcome_count' => count($uninstallModules['uninstalled']['system_welcome'])
 	);
 	cache_write(cache_system_key('module:all_uninstall'), $cache, CACHE_EXPIRE_LONG);
 	return $cache;
@@ -402,9 +436,9 @@ function cache_build_proxy_wechatpay_account() {
 			$account = account_fetch($uniaccount['default_acid']);
 			$account_setting = pdo_get('uni_settings', array ('uniacid' => $account['uniacid']));
 			$payment = iunserializer($account_setting['payment']);
-			if (is_array($account) && !empty($account['key']) && !empty($account['secret']) && in_array($account['level'], array (4)) && 
+			if (is_array($account) && !empty($account['key']) && !empty($account['secret']) && in_array($account['level'], array (4)) &&
 				is_array($payment) && !empty($payment) && intval($payment['wechat']['switch']) == 1) {
-					
+
 				if ((!is_bool ($payment['wechat']['switch']) && $payment['wechat']['switch'] != 4) || (is_bool ($payment['wechat']['switch']) && !empty($payment['wechat']['switch']))) {
 					$borrow[$account['uniacid']] = $account['name'];
 				}

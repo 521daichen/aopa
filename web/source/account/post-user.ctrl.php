@@ -17,7 +17,7 @@ if (empty($uniacid) || empty($acid)) {
 	itoast('请选择要编辑的公众号', referer(), 'error');
 }
 $state = permission_account_user_role($_W['uid'], $uniacid);
-$role_permission = in_array($state, array(ACCOUNT_MANAGE_NAME_FOUNDER, ACCOUNT_MANAGE_NAME_OWNER, ACCOUNT_MANAGE_NAME_MANAGE, ACCOUNT_MANAGE_NAME_VICE_FOUNDER));
+$role_permission = in_array($state, array(ACCOUNT_MANAGE_NAME_FOUNDER, ACCOUNT_MANAGE_NAME_OWNER, ACCOUNT_MANAGE_NAME_MANAGER, ACCOUNT_MANAGE_NAME_VICE_FOUNDER));
 if (!$role_permission) {
 	itoast('无权限操作！', referer(), 'error');
 }
@@ -46,6 +46,9 @@ if ($do == 'edit') {
 	}
 	template('account/manage-users');
 } elseif ($do == 'delete') {
+	if (!$_W['isajax'] || !$_W['ispost']) {
+		itoast('非法操作！', referer(), 'error');
+	}
 	$uid = is_array($_GPC['uid']) ? 0 : intval($_GPC['uid']);
 	if (empty($uid)) {
 		itoast('请选择要删除的用户！', referer(), 'error');
@@ -114,7 +117,7 @@ if ($do == 'edit') {
 					iajax(4, '管理员不可操作管理员', '');
 				}
 				$data['role'] = ACCOUNT_MANAGE_NAME_MANAGER;
-			} else  {
+			} else if ($addtype == ACCOUNT_MANAGE_TYPE_OPERATOR) {
 				$data['role'] = ACCOUNT_MANAGE_NAME_OPERATOR;
 			}
 			pdo_delete('uni_account_users',  array('uniacid' => $uniacid,'uid' => $user['uid']));

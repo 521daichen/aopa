@@ -15,17 +15,43 @@ load()->model('system');
 load()->model('user');
 load()->model('wxapp');
 
-$dos = array('platform', 'system', 'ext', 'get_fans_kpi', 'get_last_modules', 'get_system_upgrade', 'get_upgrade_modules', 'get_module_statistics', 'get_ads');
+$dos = array('platform', 'system', 'ext', 'get_fans_kpi', 'get_last_modules', 'get_system_upgrade', 'get_upgrade_modules', 'get_module_statistics', 'get_ads', 'get_not_installed_modules');
 $do = in_array($do, $dos) ? $do : 'platform';
+
+if ($do == 'get_not_installed_modules') {
+	$data = array();
+	$not_installed_modules = module_get_all_unistalled('uninstalled', false);
+	$not_installed_modules = $not_installed_modules['modules']['uninstalled'];
+	$data['app_count'] = count($not_installed_modules['app']);
+	$data['wxapp_count'] = count($not_installed_modules['wxapp_count']);
+	$not_installed_modules['app'] = is_array($not_installed_modules['app']) ? array_slice($not_installed_modules['app'], 0, 4) : array();
+	$not_installed_modules['wxapp'] = is_array($not_installed_modules['wxapp']) ? array_slice($not_installed_modules['wxapp'], 0, 4) : array();
+	$data['module'] = array_merge($not_installed_modules['app'], $not_installed_modules['wxapp']);
+	if (is_array($data['module']) && !empty($data['module'])) {
+		foreach ($data['module'] as &$module) {
+			if ($module['app_support'] == 2) {
+				$module['link'] = url('module/manage-system/not_installed', array('account_type' => ACCOUNT_TYPE_OFFCIAL_NORMAL));
+			} else {
+				$module['link'] = url('module/manage-system/not_installed', array('account_type' => ACCOUNT_TYPE_APP_NORMAL));
+			}
+		}
+	}
+	iajax(0, $data);
+}
+
 
 	if ($do == 'ext') {
 		if (!empty($_GPC['version_id'])) {
 			$version_info = wxapp_version($_GPC['version_id']);
 		}
-		if (!empty($_GPC['version_id']) && !(!empty($version_info['modules']) && !empty($version_info['modules'][0]['account']) && !empty($version_info['modules'][0]['account']['uniacid']) && in_array($version_info['modules'][0]['account']['type'], array(ACCOUNT_TYPE_OFFCIAL_NORMAL, ACCOUNT_TYPE_OFFCIAL_AUTH)))) {
-			checkwxapp();
-		} else {
-			checkaccount();
+		$account_api = WeAccount::create();
+		if (is_error($account_api)) {
+			message($account_api['message'], url('account/display'));
+		}
+		$check_manange = $account_api->checkIntoManage();
+		if (is_error($check_manange)) {
+			$account_display_url = $account_api->accountDisplayUrl();
+			itoast('', $account_display_url);
 		}
 	}
 
@@ -86,22 +112,21 @@ if ($do == 'platform') {
 	if (!empty($modulename)) {
 		$_W['current_module'] = module_fetch($modulename);
 	}
-	$site = WeUtility::createModule($modulename);
-	if (!is_error($site)) {
-		$method = 'welcomeDisplay';
-		if(method_exists($site, $method)){
-			define('FRAME', 'module_welcome');
-			$entries = module_entries($modulename, array('menu', 'home', 'profile', 'shortcut', 'cover', 'mine'));
-			$site->$method($entries);
-			exit;
-		}
-	}
-
 	define('FRAME', 'account');
 	define('IN_MODULE', $modulename);
 	if ($_GPC['system_welcome'] && $_W['isfounder']) {
 		$frames = buildframes('system_welcome');
 	} else {
+		$site = WeUtility::createModule($modulename);
+		if (!is_error($site)) {
+			$method = 'welcomeDisplay';
+			if(method_exists($site, $method)){
+				define('FRAME', 'module_welcome');
+				$entries = module_entries($modulename, array('menu', 'home', 'profile', 'shortcut', 'cover', 'mine'));
+				$site->$method($entries);
+				exit;
+			}
+		}
 		$frames = buildframes('account');
 	}
 	foreach ($frames['section'] as $secion) {

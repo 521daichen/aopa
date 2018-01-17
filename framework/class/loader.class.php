@@ -75,7 +75,7 @@ class Loader {
 			$this->cache[$type][$cachekey] = true;
 			return true;
 		} else {
-			trigger_error('Invalid ' . ucfirst($type) . $file, E_USER_ERROR);
+			trigger_error('Invalid ' . ucfirst($type) . $file, E_USER_WARNING);
 			return false;
 		}
 	}

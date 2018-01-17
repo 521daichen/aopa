@@ -1,26 +1,19 @@
 <?php
 /**
- * [WeEngine System] Copyright (c) 20171204170038 WE7.CC
+ * [WeEngine System] Copyright (c) 20180117114339 WE7.CC
  * WeEngine is NOT a free software, it under the license terms, visited http://www.we7.cc/ for more details.
  */
 define('IN_SYS', true);
 require '../framework/bootstrap.inc.php';
 require IA_ROOT . '/web/common/bootstrap.sys.inc.php';
 
-load()->web('common');
-load()->web('template');
-load()->func('file');
-load()->model('account');
-load()->model('setting');
-load()->model('user');
-
-$state = urldecode($_GPC['state']);
-if (!empty($state)) {
-	$login_type = explode('=', $state);
-	if (in_array($login_type[1], array('qq', 'wechat'))) {
+if (!empty($_GPC['state'])) {
+	$login_callback_params = OAuth2Client::supportParams($_GPC['state']);
+	if (!empty($login_callback_params)) {
 		$controller = 'user';
 		$action = 'login';
-		$_GPC['login_type'] = $login_type[1];
+		$_GPC['login_type'] = $login_callback_params['from'];
+		$_GPC['handle_type'] = $login_callback_params['mode'];
 	}
 }
 
@@ -95,7 +88,7 @@ if (is_array($acl[$controller]['direct']) && in_array($action, $acl[$controller]
 	exit();
 }
 checklogin();
-if ($_W['role'] != ACCOUNT_MANAGE_NAME_FOUNDER && version_compare(IMS_VERSION, '1.5.5', '>=')) {
+if ($_W['role'] != ACCOUNT_MANAGE_NAME_FOUNDER) {
 	if (empty($_W['uniacid'])) {
 		if (defined('FRAME') && FRAME == 'account') {
 			itoast('', url('account/display'), 'info');

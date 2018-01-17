@@ -12,7 +12,7 @@
 					{if $key}
 						<a href="{php echo url('article/notice-show/list', array('cateid' => $categroy['id']));}" class="btn {if $cateid == $categroy['id']}active{/if}">{$categroy['title']}</a>
 					{/if}
-				{/loop}
+					{/loop}
 				</div>
 				{if !empty($data)}
 				<div class="notice">
