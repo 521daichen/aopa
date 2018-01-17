@@ -10,6 +10,119 @@ defined('IN_IA') or exit('Access Denied');
 class Dq_2017ModuleSite extends WeModuleSite {
 
 
+    //拉卡券begin
+
+    /**
+     * 获得 api_ticket
+     * daichen
+     */
+    public function doMobileGetApiTicket(){
+        global $_W;
+        //取缓存
+        $dc_ticket=cache_load('dc_api_ticket');
+        $cache_ticket = !empty($dc_ticket['exp'])?$dc_ticket['exp']:0;
+        if($cache_ticket<time()){
+            $access_token=$this->getAccessToken($_W['uniacid']);
+            $userinfo = ihttp_get("https://api.weixin.qq.com/cgi-bin/ticket/getticket?access_token={$access_token}&type=wx_card");
+            $ticketJson=$userinfo['content'];
+            $ticketArr=json_decode($ticketJson,true);
+            $ticket=$ticketArr['ticket'];
+            //缓存时间为当前时间加7000秒  实际为7200秒
+            $cacheTime=time()+6000;
+            $cacheTicket=array(
+                'ticket'=>$ticket,
+                'exp'=>$cacheTime,
+            );
+            cache_write('dc_api_ticket', $cacheTicket);
+            return $cacheTicket['ticket'];
+        }
+        return $dc_ticket['ticket'];
+    }
+
+
+    /**
+     * 获取随机字符串 dc
+     * daichen
+     */
+    public function generateNonceStr($length=16){
+        // 密码字符集，可任意添加你需要的字符
+        $chars = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+        $str = "";
+        for($i = 0; $i < $length; $i++)
+        {
+            $str .= $chars[mt_rand(0, strlen($chars) - 1)];
+        }
+        return $str;
+    }
+
+
+    /**
+     * 获取addcard配置
+     * daichen
+     */
+    public function doMobileGetCardSignInfo($cardId){
+        global $_W;
+        $timestamp=$_W['timestamp'];
+        $api_ticket=$this->doMobileGetApiTicket();
+
+//        $card_id=htmlspecialchars($_POST['cardId']);
+
+        $card_id = $cardId;
+        $nonce_str=$this->generateNonceStr();
+        $card = array(
+            $timestamp,
+            $api_ticket,
+            $card_id,
+            $nonce_str
+        );
+        sort($card,SORT_STRING);
+        $return='';
+        foreach($card as $k=>$v){
+            $return.= $v;
+        }
+        $sign=sha1($return);
+        $res=array(
+            'timestamp'=>$timestamp,
+            'signature'=>$sign,
+            'nonce_str'=>$nonce_str,
+        );
+        return $res;
+//        echo json_encode($res);
+    }
+
+    public function doMobileThrowCardByJs()
+    {
+        global $_W,$_GPC;
+        $cardId = $_GPC['cardid'];
+        if(!empty($cardId)){
+
+            $cardId = pdo_fetchcolumn('select card_id from '.tablename('wechatcard_cardlist').'where `id`=:id and `uniacid`=:uniacid',
+                array(
+                    ':id'=>$cardId,
+                    ':uniacid'=>$_W['uniacid']
+                ));
+
+            $cardSignInfo = $this->doMobileGetCardSignInfo($cardId);
+            include $this->template('js_card/membercard');
+        }else{
+            $this->commonTips('请求错误','','info');
+        }
+    }
+
+
+    //拉卡券end
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
