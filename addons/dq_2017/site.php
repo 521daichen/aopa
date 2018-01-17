@@ -13,7 +13,7 @@ class Dq_2017ModuleSite extends WeModuleSite {
 
     protected function getReword()
     {
-        if(rand(0,10)>1){
+        if(rand(0,10)>5){
             return true;
         }else{
             return false;
