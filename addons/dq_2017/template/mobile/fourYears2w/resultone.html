@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport"  content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1, user-scalable=no">
+    <meta name="renderer" content="webkit">
+    <meta content="telephone=no" name="format-detection">
+    <link rel="stylesheet" href="../addons/dq_2017/template/mobile/fourYearSrc/css/result.css">
+    <title>真的感恩 真送两万</title>
+</head>
+<body>
+<div class="head">
+    <img class='logo' src="../addons/dq_2017/template/mobile/fourYearSrc/majiang/logo.png" alt="">
+    <img class='zier' src="../addons/dq_2017/template/mobile/fourYearSrc/majiang/zier.png" alt="">
+</div>
+<div class="userbox" style="margin-bottom: 10px;">
+
+    {if $isluck == 1}
+    <h3 style="color: #9f0200;font-size: 1.8em;">恭喜您中奖了</h3>
+    <p>本轮获得{$userzcount}票</p>
+    {elseif $isluck == 0}
+    <h3 style="color: #9f0200;font-size: 1.8em;">很遗憾您未中奖</h3>
+    <p>本轮获得{$userzcount}票</p>
+
+    {elseif $isluck == 999}
+    <h3 style="color: #9f0200;font-size: 1.8em;">您未参加本轮活动</h3>
+    {/if}
+    <p class="btn-again">
+        <a href="http://2nd.sagabuy.com/app/index.php?i=2&c=entry&ADTAG=2&boci=2&do=fourYears2w&m=dq_2017">
+            第二波活动&nbsp;&nbsp;点此开始
+        </a>
+    </p>
+
+
+</div>
+<div class="userbox" style="margin-bottom: 10px;">
+    <p style="text-align: justify; width: 95%;margin: 0 auto;padding: 5px 0;">
+        “赛格国际4周年店庆赢2万”活动颁奖典礼将于9月10日（周日）下午4点开始，
+        请获奖的幸运顾客前来领取2万现金卡，地点位于购物中心西广场，获奖者证件核实将于颁奖当天上午11点进行，
+        请务必携带所有参与活动的证件原件（含加速器）。<br>
+        领奖专线：029-86300000 欢迎大家莅临现场观礼，见证幸运时刻。
+    </p>
+
+</div>
+<p style="color: #f8f3de; font-size: 0.8em;">
+    * 为了方便您查找 本名单已按姓氏排序
+</p>
+<div class="userbox">
+    <img class='zhongjiang' src="../addons/dq_2017/template/mobile/fourYearSrc/majiang/img.png" alt="">
+    <table class="userinfo">
+
+
+
+        {loop $user $index $item}
+
+        <tr class="userdet">
+            <td>{$item['name']}</td>
+            <td>{$item['mobile']}</td>
+            <td>{$item['place']}</td>
+        </tr>
+        {/loop}
+
+        {loop $robotlist $index $item}
+
+        <tr class="userdet">
+            <td>{$item['name']}</td>
+            <td>{$item['mobile']}</td>
+            <td>{$item['place']}</td>
+        </tr>
+        {/loop}
+
+
+    </table>
+</div>
+<script src='../addons/dq_2017/template/mobile/fourYearSrc/js/jquery-1.11.3.js'></script>
+<script src="http://res.wx.qq.com/open/js/jweixin-1.2.0.js"></script>
+<script>
+    wx.config({
+        debug: false,
+        appId: "{$_W['account']['jssdkconfig']['appId']}",
+        timestamp: "{$_W['account']['jssdkconfig']['timestamp']}",
+        nonceStr: "{$_W['account']['jssdkconfig']['nonceStr']}",
+        signature: "{$_W['account']['jssdkconfig']['signature']}",
+        jsApiList: [
+            'checkJsApi',
+            'onMenuShareTimeline',
+            'onMenuShareAppMessage',
+            'hideMenuItems',
+            'showMenuItems',
+            'hideAllNonBaseMenuItem',
+            'showAllNonBaseMenuItem',
+            'translateVoice',
+            'startRecord',
+            'stopRecord',
+            'onVoiceRecordEnd',
+            'playVoice',
+            'onVoicePlayEnd',
+            'pauseVoice',
+            'stopVoice',
+            'uploadVoice',
+            'downloadVoice',
+            'chooseImage',
+            'previewImage',
+            'uploadImage',
+            'downloadImage',
+            'getNetworkType',
+            'openLocation',
+            'getLocation',
+            'hideOptionMenu',
+            'showOptionMenu',
+            'closeWindow',
+            'scanQRCode',
+            'chooseWXPay',
+            'openProductSpecificView',
+            'addCard',
+            'chooseCard',
+            'openCard'
+        ]
+    });
+    $('#star').click(function(){
+        $(this).css('display','none');
+    });
+    function orshare(){
+        var url=window.location.href;
+        wx.onMenuShareAppMessage({
+            title: '真的感恩，真送两万', // 分享标题
+            link: url, // 分享链接
+            imgUrl: 'http://2nd.sagabuy.com/addons/dq_2017/template/mobile/fourYearSrc/images/share.png', // 分享图标
+            desc: '真的感恩，真送两万-开奖名单', // 分享描述
+            success: function (res) {
+                console.log('未填信息分享');
+            }
+        });
+        wx.onMenuShareTimeline({
+            title: '真的感恩，真送两万', // 分享标题
+            link: url, // 分享链接
+            imgUrl: 'http://2nd.sagabuy.com/addons/dq_2017/template/mobile/fourYearSrc/images/share.png', // 分享图标
+            success: function (res) {
+                console.log('未填信息分享');
+            }
+        });
+    }
+    wx.ready(function() {
+        wx.hideMenuItems({
+            menuList: ["menuItem:editTag", "menuItem:delete", "menuItem:copyUrl", "menuItem:originPage", "menuItem:readMode", "menuItem:openWithQQBrowser", "menuItem:openWithSafari", "menuItem:share:email",
+                "menuItem:share:qq", "menuItem:share:weiboApp", "menuItem:favorite", "menuItem:share:facebook", "menuItem:share:QZone"
+            ] // 要隐藏的菜单项，只能隐藏“传播类”和“保护类”按钮，所有menu项见附录3
+        })
+        orshare();
+    });
+</script>
+</body>
+</html>

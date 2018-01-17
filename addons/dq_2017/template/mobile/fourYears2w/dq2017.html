@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1, user-scalable=no">
+    <meta name="renderer" content="webkit">
+    <meta content="telephone=no" name="format-detection">
+    <link rel="stylesheet" href="../addons/dq_2017/template/mobile/fourYearSrc/css/plane.css">
+    <link rel="stylesheet" href="../addons/dq_2017/template/mobile/fourYearSrc/css/myani.css">
+    <link rel="stylesheet" href="../addons/dq_2017/template/mobile/fourYearSrc/css/layer.css">
+    <title>西部机场 畅想旅行</title>
+</head>
+<body>
+
+<input type="hidden" id="uid" name="uid" value="{$user['id']}"/>
+<input type="hidden" id="zuid" name="zuid" value="{$zuid}"/>
+<div class="container" id="container">
+    <div class="planefly animated fly" id="planefly">
+        <img src="../addons/dq_2017/template/mobile/fourYearSrc/images/plane.png" alt="">
+    </div>
+    <div class="lgqq animated lgspin" id="lgqq">
+        <img src="../addons/dq_2017/template/mobile/fourYearSrc/images/lgqq.png" alt="">
+    </div>
+    <div class="smqq animated smspin" id="smqq">
+        <img src="../addons/dq_2017/template/mobile/fourYearSrc/images/smqq.png" alt="">
+    </div>
+    <div class="boardingCheak">
+        <img src="../addons/dq_2017/template/mobile/fourYearSrc/images/evl.png" class="evl" alt="">
+        <!--<div class="boarding" id="boarding">-->
+        <!--<div class="board-head">-->
+        <!--<img src="../addons/dq_2017/template/mobile/fourYearSrc/images/board-head.png" alt="">-->
+        <!--</div>-->
+        <!--<div class="board-info">-->
+        <!--<div class="depart">西安</div>-->
+        <!--<div class="to"></div>-->
+        <!--<div class="place" id="tripPlace">梦想目的地</div>-->
+        <!--</div>-->
+        <!--<div class="fligt-info">-->
+        <!--<div class="flight info">-->
+        <!--<span class="lg">航班号</span><span class="sm">FLIGHT NO</span>-->
+        <!--<p class="data">CMAG 1688</p>-->
+        <!--</div>-->
+        <!--<div class="date info">-->
+        <!--<span class="lg">日期</span><span class="sm">DATE</span>-->
+        <!--<p class="data">13 Dec</p>-->
+        <!--</div>-->
+        <!--<div class="gate info">-->
+        <!--<span class="lg">登机口</span><span class="sm">GATE</span>-->
+        <!--<p class="data">A06</p>-->
+        <!--</div>-->
+        <!--<div class="seat info">-->
+        <!--<span class="lg">座位号</span><span class="sm">SEAT</span>-->
+        <!--<p class="data">35C</p>-->
+        <!--</div>-->
+        <!--</div>-->
+        <!--<div class="passenger-info">-->
+        <!--<div class="name">-->
+        <!--<span class="lg">姓名</span><span class="sm">NAME</span>-->
+        <!--<p class="data" id="tripName"></p>-->
+        <!--</div>-->
+        <!--<div class="code">-->
+        <!--<img src="../addons/dq_2017/template/mobile/fourYearSrc/images/code.png" alt="">-->
+        <!--<div class="passenger">第{php echo $count['c']+40000001;}位乘客</div>-->
+        <!--</div>-->
+        <!--</div>-->
+        <!--</div>-->
+
+    </div>
+    <div class="papa">
+        <img src="../addons/dq_2017/template/mobile/fourYearSrc/images/papapa.png" alt="">
+    </div>
+    <div class="userinput">
+        <form>
+            <div class="user">
+                <p class="input-title">乘机人</p>
+                <p class="inputbox"><input id='userName' class="input" type="text"></p>
+            </div>
+            <div class="user">
+                <p class="input-title">手机号码</p>
+                <p class="inputbox"><input id='userPhone' class="input" type="number"></p>
+                <span style="font-size: 12px; color: #f75a3b;">* 本次活动将按手机号码抽取免费机票获取资格，请正确填写。</span>
+            </div>
+            <div class="user">
+                <p class="input-title">我的梦想目的地</p>
+                <p class="inputbox dream"><input id='usertrip' class="input" type="text" readonly pid="0" pname="0">
+                    <span class="icon"></span>
+                </p>
+            </div>
+            <div class="btn" onclick="namevali()" style="margin: 2em 0;">
+                提交
+            </div>
+        </form>
+        <div class="rule">
+            <div class="ruletitle"><span class="shu"></span> 活动规则</div>
+            <p class="ruledec">1.活动时间：12月13日 – 12月15日</p>
+            <p class="ruledec">
+                2.活动内容：选择梦想目的地并晒出，即有机会获得西安咸阳国际机场送出的梦想旅行基金，发放形式为微信现金红包和国际、国内往返机票。
+            </p>
+            <p class="ruledec">
+                3.活动规则：本活动限每人参加1次；选择梦想目的地晒出后即自动参与抽奖，送出随机金额的微信现金红包；最后，在晒出梦想目的地的所有用户中，
+                <span style="font-weight: 600;">按手机号码随机抽取5名，送出免费国际往返机票1张、免费国内往返机票4张。参与活动，邀请同行好友越多获取机票的几率越高。</span>
+            </p>
+            <p class="ruledec">
+                4.领奖规则：参与活动，获得微信现金红包资格的用户，请按照中奖页的提示领取微信现金红包。获得往返机票的用户，客服人员将电话联系您领奖。
+            </p>
+        </div>
+    </div>
+    <!--<div class="footer">BM tech 技术支持</div>-->
+    <div class="placebox hidden" id="placeBox">
+        <p class="title">请选择梦想旅行地：</p>
+
+        {loop $dreams $key $dream}
+        <div class="dream-place">
+            <div class="zm"><span>{$key}</span></div>
+            <div class="place-contain">
+                {loop $dream $dreamInfo}
+                <span class="dreamtrip" pname="{$dreamInfo['name']}" pid="{$dreamInfo['id']}"
+                      pic="{php echo $this->getPicPath($dreamInfo['cat'],1);}"
+                      onclick="mydreamplace(this)">{$dreamInfo['name']}</span>
+                {/loop}
+            </div>
+        </div>
+        {/loop}
+        <!--<p class="dreamtrip">大理</p>-->
+    </div>
+
+</div>
+<script src='../addons/dq_2017/template/mobile/fourYearSrc/js/jquery-1.11.3.js'></script>
+<script src="http://res.wx.qq.com/open/js/jweixin-1.2.0.js"></script>
+<script src="../addons/dq_2017/template/mobile/fourYearSrc/js/main.js"></script>
+<script src="../addons/dq_2017/template/mobile/fourYearSrc/js/layer.js"></script>
+<script>
+    wx.config({
+        debug: false,
+        appId: "{$_W['account']['jssdkconfig']['appId']}",
+        timestamp: "{$_W['account']['jssdkconfig']['timestamp']}",
+        nonceStr: "{$_W['account']['jssdkconfig']['nonceStr']}",
+        signature: "{$_W['account']['jssdkconfig']['signature']}",
+        jsApiList: [
+            'checkJsApi',
+            'onMenuShareTimeline',
+            'onMenuShareAppMessage',
+            'hideMenuItems',
+            'showMenuItems',
+            'hideAllNonBaseMenuItem',
+            'showAllNonBaseMenuItem',
+            'translateVoice',
+            'startRecord',
+            'stopRecord',
+            'onVoiceRecordEnd',
+            'playVoice',
+            'onVoicePlayEnd',
+            'pauseVoice',
+            'stopVoice',
+            'uploadVoice',
+            'downloadVoice',
+            'chooseImage',
+            'previewImage',
+            'uploadImage',
+            'downloadImage',
+            'getNetworkType',
+            'openLocation',
+            'getLocation',
+            'hideOptionMenu',
+            'showOptionMenu',
+            'closeWindow',
+            'scanQRCode',
+            'chooseWXPay',
+            'openProductSpecificView',
+            'addCard',
+            'chooseCard',
+            'openCard'
+        ]
+    });
+</script>
+<script>
+    function orshare() {
+        var url = window.location.href;
+        wx.onMenuShareAppMessage({
+            title: '我要去追寻我的梦想了，你来吗？', // 分享标题
+            link: url, // 分享链接
+            imgUrl: 'http://mswechat.mebaby.cn/addons/dq_2017/template/mobile/fourYearSrc/images/shareAir.png', // 分享图标
+            desc: '西安咸阳国际机场客流突破4000万，送万元梦想旅行基金，还在等什么，走起！', // 分享描述
+            success: function (res) {
+                console.log('未填信息分享');
+            }
+        });
+        wx.onMenuShareTimeline({
+            title: '我要去追寻我的梦想了，你来吗？', // 分享标题
+            link: url, // 分享链接
+            imgUrl: 'http://mswechat.mebaby.cn/addons/dq_2017/template/mobile/fourYearSrc/images/shareAir.png', // 分享图标
+            success: function (res) {
+                console.log('未填信息分享');
+            }
+        });
+    }
+
+    wx.ready(function () {
+        wx.hideMenuItems({
+            menuList: ["menuItem:editTag", "menuItem:delete", "menuItem:copyUrl", "menuItem:originPage", "menuItem:readMode", "menuItem:openWithQQBrowser", "menuItem:openWithSafari", "menuItem:share:email",
+                "menuItem:share:qq", "menuItem:share:weiboApp", "menuItem:favorite", "menuItem:share:facebook", "menuItem:share:QZone"
+            ] // 要隐藏的菜单项，只能隐藏“传播类”和“保护类”按钮，所有menu项见附录3
+        });
+        orshare();
+    });
+</script>
+</body>
+</html>

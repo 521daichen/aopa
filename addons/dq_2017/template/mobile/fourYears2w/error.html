@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1, user-scalable=no">
+    <meta name="renderer" content="webkit">
+    <meta content="telephone=no" name="format-detection">
+    <link rel="stylesheet" href="../addons/dq_2017/template/mobile/fourYearSrc/css/plane.css">
+    <title>西部机场 畅想旅行</title>
+</head>
+<body>
+
+<div class="container" id="container">
+    <div class="boardingCheak">
+        <div class="fffbg">
+            <img src="../addons/dq_2017/template/mobile/fourYearSrc/images/no.png" alt="" class="error">
+            <p class="fuwuqi">服务器繁忙，请重试！</p>
+        </div>
+    </div>
+
+</div>
+<script src='../addons/dq_2017/template/mobile/fourYearSrc/js/jquery-1.11.3.js'></script>
+<script src="http://res.wx.qq.com/open/js/jweixin-1.2.0.js"></script>
+<script>
+    wx.config({
+        debug: false,
+        appId: "{$_W['account']['jssdkconfig']['appId']}",
+        timestamp: "{$_W['account']['jssdkconfig']['timestamp']}",
+        nonceStr: "{$_W['account']['jssdkconfig']['nonceStr']}",
+        signature: "{$_W['account']['jssdkconfig']['signature']}",
+        jsApiList: [
+            'checkJsApi',
+            'onMenuShareTimeline',
+            'onMenuShareAppMessage',
+            'hideMenuItems',
+            'showMenuItems',
+            'hideAllNonBaseMenuItem',
+            'showAllNonBaseMenuItem',
+            'translateVoice',
+            'startRecord',
+            'stopRecord',
+            'onVoiceRecordEnd',
+            'playVoice',
+            'onVoicePlayEnd',
+            'pauseVoice',
+            'stopVoice',
+            'uploadVoice',
+            'downloadVoice',
+            'chooseImage',
+            'previewImage',
+            'uploadImage',
+            'downloadImage',
+            'getNetworkType',
+            'openLocation',
+            'getLocation',
+            'hideOptionMenu',
+            'showOptionMenu',
+            'closeWindow',
+            'scanQRCode',
+            'chooseWXPay',
+            'openProductSpecificView',
+            'addCard',
+            'chooseCard',
+            'openCard'
+        ]
+    });
+</script>
+<script>
+    function shuaxin(){
+        window.location.href = window.location.href+"&rand="+Math.random();
+    }
+    function orshare() {
+        var url = window.location.href;
+        wx.onMenuShareAppMessage({
+            title: '我要去追寻我的梦想了，你来吗？', // 分享标题
+            link: url, // 分享链接
+            imgUrl: 'http://2nd.sagabuy.com/addons/dq_2017/template/mobile/fourYearSrc/images/air.png', // 分享图标
+            desc: '西安咸阳国际机场客流突破4000万，送万元梦想旅行基金，还在等什么，走起！', // 分享描述
+            success: function (res) {
+                console.log('succ');
+            }
+
+        });
+        wx.onMenuShareTimeline({
+            title: '我要去追寻我的梦想了，你来吗？', // 分享标题
+            link: url, // 分享链接
+            imgUrl: 'http://2nd.sagabuy.com/addons/dq_2017/template/mobile/fourYearSrc/images/air.png', // 分享图标
+            success: function (res) {
+                console.log('succ');
+            }
+        });
+    }
+
+    wx.ready(function () {
+        wx.hideMenuItems({
+            menuList: ["menuItem:editTag", "menuItem:delete", "menuItem:copyUrl", "menuItem:originPage", "menuItem:readMode", "menuItem:openWithQQBrowser", "menuItem:openWithSafari", "menuItem:share:email",
+                "menuItem:share:qq", "menuItem:share:weiboApp", "menuItem:favorite", "menuItem:share:facebook", "menuItem:share:QZone"
+            ] // 要隐藏的菜单项，只能隐藏“传播类”和“保护类”按钮，所有menu项见附录3
+        });
+        orshare();
+    });
+</script>
+</body>
+</html>

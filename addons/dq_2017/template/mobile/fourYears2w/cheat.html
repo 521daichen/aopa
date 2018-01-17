@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport"  content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1, user-scalable=no">
+    <meta name="renderer" content="webkit">
+    <meta content="telephone=no" name="format-detection">
+    <link rel="stylesheet" href="../addons/dq_2017/template/mobile/fourYearSrc/css/result.css">
+    <title>真的感恩 真送两万</title>
+    <style>
+        .tips2 {
+            font-size: 1em;
+            line-height: 1.5em;
+            text-align: justify;
+            letter-spacing: 1px;
+            margin: 0 auto;
+            width: 95%;
+        }
+
+    </style>
+</head>
+<body>
+<div class="head">
+    <img class='logo' src="../addons/dq_2017/template/mobile/fourYearSrc/majiang/logo.png" alt="">
+    <img class='zier' src="../addons/dq_2017/template/mobile/fourYearSrc/majiang/zier.png" alt="">
+</div>
+<div class="box" style="padding: 30px 10px;">
+
+    <img class='paidui' style="width: 30%;margin-bottom: 30px;" src="../addons/dq_2017/template/mobile/fourYearSrc/majiang/x.png" alt="">
+    <p class="tips2">
+        尊敬的“赛格赢2万”参赛者您好，系统检测到您投票过程状态异常，审核无法通过。
+        我们遗憾地通知您：您的投票未能通过第一波段活动系统审核，投票无效。
+        感谢您的参与，请继续关注并参与赛格下几个波段的活动，祝您在下一波活动中顺利通过审核。
+    </p>
+
+
+
+</div>
+
+<script src='../addons/dq_2017/template/mobile/fourYearSrc/js/jquery-1.11.3.js'></script>
+<script src="http://res.wx.qq.com/open/js/jweixin-1.2.0.js"></script>
+<script>
+    wx.config({
+        debug: false,
+        appId: "{$_W['account']['jssdkconfig']['appId']}",
+        timestamp: "{$_W['account']['jssdkconfig']['timestamp']}",
+        nonceStr: "{$_W['account']['jssdkconfig']['nonceStr']}",
+        signature: "{$_W['account']['jssdkconfig']['signature']}",
+        jsApiList: [
+            'checkJsApi',
+            'onMenuShareTimeline',
+            'onMenuShareAppMessage',
+            'hideMenuItems',
+            'showMenuItems',
+            'hideAllNonBaseMenuItem',
+            'showAllNonBaseMenuItem',
+            'translateVoice',
+            'startRecord',
+            'stopRecord',
+            'onVoiceRecordEnd',
+            'playVoice',
+            'onVoicePlayEnd',
+            'pauseVoice',
+            'stopVoice',
+            'uploadVoice',
+            'downloadVoice',
+            'chooseImage',
+            'previewImage',
+            'uploadImage',
+            'downloadImage',
+            'getNetworkType',
+            'openLocation',
+            'getLocation',
+            'hideOptionMenu',
+            'showOptionMenu',
+            'closeWindow',
+            'scanQRCode',
+            'chooseWXPay',
+            'openProductSpecificView',
+            'addCard',
+            'chooseCard',
+            'openCard'
+        ]
+    });
+    function orshare(){
+        var url=window.location.href;
+        wx.onMenuShareAppMessage({
+            title: '赛格四周年 真的感恩 真送两万 我离两万就差你一票', // 分享标题
+            link: url, // 分享链接
+            imgUrl: 'http://2nd.sagabuy.com/addons/dq_2017/template/mobile/fourYearSrc/images/share.png', // 分享图标
+            desc: '赛格国际开业四周年之际，拿出两千万，评选1000名幸运顾客，每人两万', // 分享描述
+            success: function (res) {
+                console.log('未填信息分享');
+            }
+        });
+        wx.onMenuShareTimeline({
+            title: '赛格四周年 真的感恩 真送两万 我离两万就差你一票', // 分享标题
+            link: url, // 分享链接
+            imgUrl: 'http://2nd.sagabuy.com/addons/dq_2017/template/mobile/fourYearSrc/images/share.png', // 分享图标
+            success: function (res) {
+                console.log('未填信息分享');
+            }
+        });
+    }
+    wx.ready(function() {
+        wx.hideMenuItems({
+            menuList: ["menuItem:editTag", "menuItem:delete", "menuItem:copyUrl", "menuItem:originPage", "menuItem:readMode", "menuItem:openWithQQBrowser", "menuItem:openWithSafari", "menuItem:share:email",
+                "menuItem:share:qq", "menuItem:share:weiboApp", "menuItem:favorite", "menuItem:share:facebook", "menuItem:share:QZone"
+            ] // 要隐藏的菜单项，只能隐藏“传播类”和“保护类”按钮，所有menu项见附录3
+        })
+        orshare();
+    });
+</script>
+</body>
+</html>

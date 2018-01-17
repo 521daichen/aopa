@@ -1,0 +1,265 @@
+html, body {
+    -webkit-tap-highlight-color:transparent;
+}
+a{
+    text-decoration: none;
+    color: #000000;
+}
+body {
+    font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
+    font-size: 14px;
+    color:#000;
+    margin: 0;
+    padding: 0;
+    line-height: 1.5em;
+    width:100%;
+    text-align: center;
+    background: #e43d40;
+    background: url('../majiang/bgg.png');
+    background-size: 100px 100px;
+}
+img{
+    width:100%;
+    vertical-align: bottom;
+    display: block;
+}
+.head{
+    width:95%;
+    margin:10px auto;
+}
+.logo{
+    width: 30%;
+    margin: 0 23px;
+}
+.zier{
+    width: 87%;
+    margin: 15px auto;
+}
+.inputbox{
+    background-color: #f8f3de;
+    width: 85%;
+    margin: 0 auto;
+    margin-bottom: 30px;
+    border-radius: 10px;
+    padding: 15px 10px;
+    padding-bottom: 70px;
+    box-sizing: border-box;
+}
+.zhongjiang{
+    width:55%;
+    margin:0 auto;
+    margin-bottom:15px;
+    margin-top: 10px;
+}
+.resultbox{
+    margin: 19px auto;
+}
+.resultbox p{
+    padding: 0;
+    margin: 0 auto;
+    text-align: center;
+    font-size: 10px;
+}
+.resultbox .btn-end{
+    background: url(../majiang/but1.png) no-repeat;
+    background-size: 100% 100%;
+    width: 80%;
+    text-align: center;
+    box-sizing: border-box;
+    font-size: 1.1em;
+}
+.btn-again{
+    background: url(../majiang/but1.png) no-repeat;
+    background-size: 100% 100%;
+    width: 65%;
+    text-align: center;
+    box-sizing: border-box;
+    font-size: 1.2em;
+    line-height: 2em;
+    margin: 0 auto;
+    color: #fff;
+    font-weight: bold;
+}
+.btn-again a{
+    color: #ffffff;
+}
+.resultbox .btn-ing{
+    background: url("../majiang/but2.png") no-repeat;
+    background-size: 100% 100%;
+    width:80%;
+    text-align: center;
+    box-sizing: border-box;
+    font-size: 1.1em;
+}
+.resultbox .btn-end a,.resultbox .btn-ing a{
+    font-size:1.4em;
+    line-height: 1.8em;
+    color: #ffffff;
+    text-decoration: none;
+}
+.title{
+    text-align: center;
+    letter-spacing: 10px;
+    font-size: 30px;
+    margin-bottom: 25px;
+}
+.paidui{
+    width: 65%;
+    margin: 10px auto;
+}
+.tips{
+    font-size: 1em;
+    line-height: 1.5em;
+    text-align: center;
+}
+.shuaxin{
+    width: 40%;
+    margin: 20px auto;
+    padding: 8px 0;
+    background-color: #8b0000;
+    border-radius: 8px;
+    font-size:1.2em;
+    line-height: 1.5em;
+    color: #ffffff;
+}
+.box{
+    background-color: #f8f3de;
+    width: 85%;
+    margin: 20px auto;
+    margin-bottom: 30px;
+    border-radius: 10px;
+    padding: 15px 10px;
+    box-sizing: border-box;
+}
+.userbox{
+    background-color: #f8f3de;
+    width: 85%;
+    margin: 0 auto;
+    border-radius: 10px;
+    padding: 10px;
+    box-sizing: border-box;
+    margin-bottom:50px;
+}
+.userinfo{
+    width: 75%;
+    min-height:330px;
+    margin-left:15%;
+    list-style-type: none;
+    padding:0;
+}
+.userinfo td{
+    color: #794115;
+    text-align: left;
+}
+.userinfo td:nth-child(2){
+    color: #794115;
+    text-align: center;
+}
+.wechat{
+    width: 40%;
+    margin: 30px auto;
+}
+.rule{
+    text-align: justify;
+    text-indent: 2px;
+    padding: 0 3px;
+    line-height: 2em;
+    color: #621712;
+}
+.star{
+    width: 70%;
+    position: fixed;
+    top: 10%;
+    left: 15%;
+    z-index: 200;
+}
+@-webkit-keyframes bounceIn {
+    0%, 20%, 40%, 60%, 80%, 100% {
+        -webkit-transition-timing-function: cubic-bezier(0.215, 0.610, 0.355, 1.000);
+        transition-timing-function: cubic-bezier(0.215, 0.610, 0.355, 1.000);
+    }
+
+    0% {
+        opacity: 0;
+        -webkit-transform: scale3d(.3, .3, .3);
+        transform: scale3d(.3, .3, .3);
+    }
+
+    20% {
+        -webkit-transform: scale3d(1.1, 1.1, 1.1);
+        transform: scale3d(1.1, 1.1, 1.1);
+    }
+
+    40% {
+        -webkit-transform: scale3d(.9, .9, .9);
+        transform: scale3d(.9, .9, .9);
+    }
+
+    60% {
+        opacity: 1;
+        -webkit-transform: scale3d(1.03, 1.03, 1.03);
+        transform: scale3d(1.03, 1.03, 1.03);
+    }
+
+    80% {
+        -webkit-transform: scale3d(.97, .97, .97);
+        transform: scale3d(.97, .97, .97);
+    }
+
+    100% {
+        opacity: 1;
+        -webkit-transform: scale3d(1, 1, 1);
+        transform: scale3d(1, 1, 1);
+    }
+}
+
+@keyframes bounceIn {
+    0%, 20%, 40%, 60%, 80%, 100% {
+        -webkit-transition-timing-function: cubic-bezier(0.215, 0.610, 0.355, 1.000);
+        transition-timing-function: cubic-bezier(0.215, 0.610, 0.355, 1.000);
+    }
+
+    0% {
+        opacity: 0;
+        -webkit-transform: scale3d(.3, .3, .3);
+        transform: scale3d(.3, .3, .3);
+    }
+
+    20% {
+        -webkit-transform: scale3d(1.1, 1.1, 1.1);
+        transform: scale3d(1.1, 1.1, 1.1);
+    }
+
+    40% {
+        -webkit-transform: scale3d(.9, .9, .9);
+        transform: scale3d(.9, .9, .9);
+    }
+
+    60% {
+        opacity: 1;
+        -webkit-transform: scale3d(1.03, 1.03, 1.03);
+        transform: scale3d(1.03, 1.03, 1.03);
+    }
+
+    80% {
+        -webkit-transform: scale3d(.97, .97, .97);
+        transform: scale3d(.97, .97, .97);
+    }
+
+    100% {
+        opacity: 1;
+        -webkit-transform: scale3d(1, 1, 1);
+        transform: scale3d(1, 1, 1);
+    }
+}
+
+.bounceIn {
+    -webkit-animation-name: bounceIn;
+    animation-name: bounceIn;
+    -webkit-animation-duration: 1s;
+    animation-duration: 1s;
+    -webkit-animation-fill-mode: both;
+    animation-fill-mode: both;
+    -webkit-animation-iteration-count: 3;
+    animation-iteration-count: 3;
+}

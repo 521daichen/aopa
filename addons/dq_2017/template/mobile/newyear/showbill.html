@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1, user-scalable=no">
+    <meta name="renderer" content="webkit">
+    <meta content="telephone=no" name="format-detection">
+    <link rel="stylesheet" href="../addons/dq_2017/template/mobile/newyear/css/weui.css">
+    <link rel="stylesheet" href="../addons/dq_2017/template/mobile/newyear/css/main.css">
+    <!--<link rel="stylesheet" href="css/weui.css">-->
+    <title>晒购物小票 赢新年红包</title>
+</head>
+<body ontouchstart>
+<div class="header">
+    <img src="../addons/dq_2017/template/mobile/newyear/images/top.png" alt="">
+</div>
+<div class="container">
+    <div class="bill">
+        <img src="../addons/dq_2017/template/mobile/newyear/images/p2.png" class="infoimg" alt="">
+
+        <div class="btn-box btn-box-margin">
+            <a class="mybtn" href="javascript:;" onclick="showshare()">领取现金券</a>
+        </div>
+    </div>
+    <div class="infobox" style="margin-top:-40px">
+        <img src="../addons/dq_2017/template/mobile/newyear/images/t2.png" class="infoimg" alt="">
+        <img src="../addons/dq_2017/template/mobile/newyear/images/step.png" class="infoimg" alt="">
+
+    </div>
+</div>
+<div class="share hidden" id="sharesucc">
+    <img src="../addons/dq_2017/template/mobile/newyear/images/p3.png" alt="" class="card" id="card" onclick="sendcard();">
+    <div class="gx">
+        <h2>恭喜你获得现金券</h2>
+        <h2 style="margin-bottom: 5px;">同时获得抽奖资格</h2>
+        <p>12.29-1.1每日抽取10名获奖者</p>
+        <p>中奖结果将电话通知</p>
+        <p>代金券使用期限：2018.1.15 - 2018.2.15</p>
+    </div>
+</div>
+<div class="share hidden" id="shareto">
+    <img src="../addons/dq_2017/template/mobile/newyear/images/tofriend.png" class="sharefig" alt="">
+</div>
+<script src="http://res.wx.qq.com/open/js/jweixin-1.2.0.js"></script>
+<script src='../addons/dq_2017/template/mobile/newyear/js/jq.js'></script>
+<script src='../addons/dq_2017/template/mobile/newyear/js/share.js'></script>
+<script>
+    wx.config({
+        debug: false,
+        appId: "{$_W['account']['jssdkconfig']['appId']}",
+        timestamp: "{$_W['account']['jssdkconfig']['timestamp']}",
+        nonceStr: "{$_W['account']['jssdkconfig']['nonceStr']}",
+        signature: "{$_W['account']['jssdkconfig']['signature']}",
+        jsApiList: [
+            'checkJsApi',
+            'onMenuShareTimeline',
+            'onMenuShareAppMessage',
+            'hideMenuItems',
+            'showMenuItems',
+            'hideAllNonBaseMenuItem',
+            'showAllNonBaseMenuItem',
+            'translateVoice',
+            'startRecord',
+            'stopRecord',
+            'onVoiceRecordEnd',
+            'playVoice',
+            'onVoicePlayEnd',
+            'pauseVoice',
+            'stopVoice',
+            'uploadVoice',
+            'downloadVoice',
+            'chooseImage',
+            'previewImage',
+            'uploadImage',
+            'downloadImage',
+            'getNetworkType',
+            'openLocation',
+            'getLocation',
+            'hideOptionMenu',
+            'showOptionMenu',
+            'closeWindow',
+            'scanQRCode',
+            'chooseWXPay',
+            'openProductSpecificView',
+            'addCard',
+            'chooseCard',
+            'openCard'
+        ]
+    });
+</script>
+<script>
+    var _mtac = {"senseQuery":1};
+    (function() {
+        var mta = document.createElement("script");
+        mta.src = "http://pingjs.qq.com/h5/stats.js?v2.0.4";
+        mta.setAttribute("name", "MTAH5");
+        mta.setAttribute("sid", "500568760");
+        mta.setAttribute("cid", "500568765");
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(mta, s);
+    })();
+</script>
+</body>
+</html>

@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1, user-scalable=no">
+    <meta name="renderer" content="webkit">
+    <meta content="telephone=no" name="format-detection">
+    <link rel="stylesheet" href="../addons/dq_2017/template/mobile/fourYearSrc/css/show.css">
+    <link rel="stylesheet" href="../addons/dq_2017/template/mobile/fourYearSrc/css/layer.css">
+    <link rel="stylesheet" href="../addons/dq_2017/template/mobile/fourYearSrc/css/myani.css">
+    <title>西部机场 畅想旅行</title>
+</head>
+<body>
+<input type="hidden" id="zuid" name="zuid" value="{$zuid}"/>
+<div class="container" id="container"
+     style="background-image:url('{php echo $this->getPicPath($dreamInfo['cat'],1);}')">
+    <div class="share evlbox" id="evlbox" onclick="flyevl(this)">
+        <div class="flyevl becbig" id="flyevl">
+            <img src="../addons/dq_2017/template/mobile/fourYearSrc/images/evlname.png" alt="">
+        </div>
+
+    </div>
+    <div class="boardingCheck" id="boardingCheck">
+        <div class="envelope">
+            <div class="evlbotm" id="evlbotm">
+                <img src="../addons/dq_2017/template/mobile/fourYearSrc/images/evlbotm.png" alt="">
+            </div>
+            <div class="boarding" id="boarding">
+                <div class="board-head">
+                    <img src="../addons/dq_2017/template/mobile/fourYearSrc/images/board-head.png" alt="">
+                </div>
+                <div class="board-info">
+                    <div class="depart">西安</div>
+                    <div class="to"></div>
+                    <div class="place" id="tripPlace">{$dreamInfo['name']}</div>
+                </div>
+                <div class="fligt-info">
+                    <div class="flight info">
+                        <span class="lg">航班号</span><span class="sm">FLIGHT NO.</span>
+                        <p class="data">CWAG 1688</p>
+                    </div>
+                    <div class="date info">
+                        <span class="lg">日期</span><span class="sm">DATE</span>
+                        <p class="data">13 Dec</p>
+                    </div>
+                    <div class="gate info">
+                        <span class="lg">登机口</span><span class="sm">GATE</span>
+                        <p class="data">{$zuserInfo['plangate']}</p>
+                    </div>
+                    <div class="seat info">
+                        <span class="lg">座位号</span><span class="sm">SEAT NO.</span>
+                        <p class="data">{$zuserInfo['seat']}</p>
+                    </div>
+                </div>
+                <div class="passenger-info">
+                    <div class="name">
+                        <span class="lg">乘机人</span><span class="sm">NAME</span>
+                        <p class="data" id="tripName">{$zuserInfo['name']}</p>
+                    </div>
+                    <div class="code">
+                        <img src="../addons/dq_2017/template/mobile/fourYearSrc/images/code.png" alt="">
+                        <div class="passenger">第{php echo $customerNumber['c']+40002088;}位乘客</div>
+                    </div>
+                </div>
+            </div>
+            <div class='evltop' id="evltop">
+                <img src="../addons/dq_2017/template/mobile/fourYearSrc/images/evltop.png" alt="">
+            </div>
+        </div>
+    </div>
+    <div class="userinput">
+        <div class="btn sharebtn" id="accompanybtn">我想与TA同行</div>
+        <div class="btn gotoo" id="gobtn">
+            <a href="http://mswechat.mebaby.cn/app/index.php?i=2&c=entry&do=fourYears2w&m=dq_2017">我也要参与 赢红包机票</a>
+        </div>
+    </div>
+
+    <div class="doimgbox">
+        <img src="{php echo $this->getPicPath($dreamInfo['cat'],2);}" alt="">
+        <p>
+            <span class="tl">{$dreamInfo['pic2_desc']}</span>
+            {if $dreamInfo['pic2']!=''}
+            <span class="tr">【{$dreamInfo['pic2']}】</span>
+            {/if}
+        </p>
+        <img src="{php echo $this->getPicPath($dreamInfo['cat'],3);}" alt="">
+        <p>
+            <span class="tl">{$dreamInfo['pic3_desc']}</span>
+            {if $dreamInfo['pic3']!=''}
+            <span class="tr">【{$dreamInfo['pic3']}】</span>
+            {/if}
+        </p>
+        <img src="{php echo $this->getPicPath($dreamInfo['cat'],4);}" alt="">
+        <p>
+            <span class="tl">{$dreamInfo['pic4_desc']}</span>
+            {if $dreamInfo['pic4']!=''}
+            <span class="tr">【{$dreamInfo['pic4']}】</span>
+            {/if}
+        </p>
+
+    </div>
+    {if !empty($dreamLogs)}
+    <div class="accompany">
+        <div class="com-header">
+            <img src="../addons/dq_2017/template/mobile/fourYearSrc/images/accompany.png" alt="">
+        </div>
+        <div class="com-list">
+            <ul>
+
+                {loop $dreamLogs $dreamLog}
+                <li>
+                    <div class="avatar">
+
+                        {if empty($dreamLog['hheadimage'])}
+                        <img src="../addons/dq_2017/template/mobile/fourYearSrc/images/avatar.jpg" alt="">
+                        {else}
+                        <img src="{$dreamLog['hheadimage']}" alt="">
+                        {/if}
+
+                    </div>
+                    <div class="com-name">{$dreamLog['hname']}</div>
+                    <div class="com-go"><span>同行去{$dreamLog['doing']}</span></div>
+                </li>
+                {/loop}
+            </ul>
+        </div>
+    </div>
+    {/if}
+
+
+    <div class="share hidden" id="withme">
+        <div class="acc-box">
+            <p>请输入同行者昵称：</p>
+            <p><input type="text" name="accman" class='accman' id="accman"></p>
+            <div class="btn-box">
+                <div class="btn sharebtn" id="accconfirm">确&nbsp;&nbsp;&nbsp;定</div>
+            </div>
+        </div>
+    </div>
+    <div class="share hidden" id="dodo">
+        <div class="dodo">
+            <img src="../addons/dq_2017/template/mobile/fourYearSrc/images/cc.png" alt="" id="doImg">
+            <p class="withmedo" id="who"></p>
+            <p class="withmedo" id="what"></p>
+        </div>
+    </div>
+    <!--<div class="footer">BM tech 技术支持</div>-->
+
+</div>
+<script src='../addons/dq_2017/template/mobile/fourYearSrc/js/jquery-1.11.3.js'></script>
+<script src="http://res.wx.qq.com/open/js/jweixin-1.2.0.js"></script>
+<script src="../addons/dq_2017/template/mobile/fourYearSrc/js/layer.js"></script>
+<script>
+    wx.config({
+        debug: false,
+        appId: "{$_W['account']['jssdkconfig']['appId']}",
+        timestamp: "{$_W['account']['jssdkconfig']['timestamp']}",
+        nonceStr: "{$_W['account']['jssdkconfig']['nonceStr']}",
+        signature: "{$_W['account']['jssdkconfig']['signature']}",
+        jsApiList: [
+            'checkJsApi',
+            'onMenuShareTimeline',
+            'onMenuShareAppMessage',
+            'hideMenuItems',
+            'showMenuItems',
+            'hideAllNonBaseMenuItem',
+            'showAllNonBaseMenuItem',
+            'translateVoice',
+            'startRecord',
+            'stopRecord',
+            'onVoiceRecordEnd',
+            'playVoice',
+            'onVoicePlayEnd',
+            'pauseVoice',
+            'stopVoice',
+            'uploadVoice',
+            'downloadVoice',
+            'chooseImage',
+            'previewImage',
+            'uploadImage',
+            'downloadImage',
+            'getNetworkType',
+            'openLocation',
+            'getLocation',
+            'hideOptionMenu',
+            'showOptionMenu',
+            'closeWindow',
+            'scanQRCode',
+            'chooseWXPay',
+            'openProductSpecificView',
+            'addCard',
+            'chooseCard',
+            'openCard'
+        ]
+    });
+</script>
+<script>
+    var sharetitle = "{$shareInfo['title']}";
+    var sharedec = "{$shareInfo['desc']}";
+    window.onload = function () {
+        var pname = $('#tripPlace').html();
+        if (pname.length <= 3) {
+            $('#tripPlace').css('letter-spacing', '0.5em');
+        } else {
+            $('#tripPlace').css('letter-spacing', '2px');
+        }
+    };
+
+    function flyevl(o) {
+        $(o).addClass('hidden');
+        $('#boarding').addClass('slidetop');
+        $('#boardingCheck').addClass('bectop');
+        $('#evlbotm,#evltop').fadeOut();
+    }
+
+    $('#dodo').click(function () {
+        $(this).addClass('hidden');
+        window.location.href = window.location.href + "&rand=" + Math.random();
+    })
+    $('#accompanybtn').click(function () {
+        $('#withme').removeClass('hidden')
+    })
+    $('#accconfirm').click(function () {
+        var name = $('#accman').val();
+        var zuid = $('#zuid').val();
+        var place = $('#tripPlace').html();
+        if (name.replace(/(^s*)|(s*$)/g, "").length != 0) {
+            if (name.replace(/(^s*)|(s*$)/g, "").length <= 5) {
+                $.ajax({
+                    type: 'POST',
+                    dataType: 'JSON',
+                    url: 'http://mswechat.mebaby.cn/app/index.php?i=2&c=entry&do=ZanFuns&m=dq_2017',
+                    data: {
+                        name: name,
+                        zuid: zuid
+                    },
+                    success: function (res) {
+                        $('#withme').addClass('hidden');
+                        if (res.status == 1) {
+                            $('#doImg').attr('src', res.data.pic);
+                            $('#who').html(res.data.hname + '和' + res.data.zname + '同行');
+                            $('#what').html('去' + place + res.data.doing);
+                            $('#dodo').removeClass('hidden');
+                        } else if (res.status == 0) {
+                            layer.open({
+                                content: res.msg,
+                                btn: '知道了'
+                            });
+                            $('#dodo').addClass('hidden');
+                        }
+                    }
+                })
+            } else {
+                layer.open({
+                    content: '昵称不能超过5个字符哦',
+                    btn: '知道了'
+                })
+            }
+        } else {
+            layer.open({
+                content: '请输入同行者昵称',
+                btn: '知道了'
+            })
+        }
+
+    })
+
+    function orshare() {
+        var url = window.location.href;
+        wx.onMenuShareAppMessage({
+            title: sharetitle, // 分享标题
+            link: url, // 分享链接
+            imgUrl: 'http://mswechat.mebaby.cn/addons/dq_2017/template/mobile/fourYearSrc/images/shareAir.png', // 分享图标
+            desc: sharedec, // 分享描述
+            success: function (res) {
+                console.log('未填信息分享');
+            }
+
+        })
+        wx.onMenuShareTimeline({
+            title: sharetitle, // 分享标题
+            link: url, // 分享链接
+            imgUrl: 'http://mswechat.mebaby.cn/addons/dq_2017/template/mobile/fourYearSrc/images/shareAir.png', // 分享图标
+            success: function (res) {
+                console.log('未填信息分享');
+            }
+        })
+    }
+
+    wx.ready(function () {
+        wx.hideMenuItems({
+            menuList: ["menuItem:editTag", "menuItem:delete", "menuItem:copyUrl", "menuItem:originPage", "menuItem:readMode", "menuItem:openWithQQBrowser", "menuItem:openWithSafari", "menuItem:share:email",
+                "menuItem:share:qq", "menuItem:share:weiboApp", "menuItem:favorite", "menuItem:share:facebook", "menuItem:share:QZone"
+            ] // 要隐藏的菜单项，只能隐藏“传播类”和“保护类”按钮，所有menu项见附录3
+        });
+        orshare();
+    })
+</script>
+</body>
+</html>

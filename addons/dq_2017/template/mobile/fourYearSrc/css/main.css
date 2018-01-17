@@ -1,0 +1,487 @@
+html, body {
+    position: relative;
+    height: 100%;
+    -webkit-tap-highlight-color:transparent;
+}
+body {
+    background: #eee;
+    font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
+    font-size: 14px;
+    color:#000;
+    margin: 0;
+    padding: 0;
+}
+img{
+    width:100%;
+    vertical-align: bottom;
+    display: block;
+}
+.hidden{
+    display: none;
+}
+.swiper-container {
+    width: 100%;
+    height: 100%;
+}
+.swiper-slide {
+    width:100%;
+    text-align: center;
+    font-size: 18px;
+    background: #e43d40;
+}
+.body:after{
+    content: '';
+    display: block;
+    clear: both;
+}
+.body:before{
+    content: '';
+    display: table;
+}
+.pgone{
+    background: url('../images/bg.png') no-repeat;
+    background-size: 100%;
+}
+.pgone .head{
+    width: 95%;
+    margin: 0 auto;
+    margin-top: 12px;
+}
+.pgone .music{
+    position: fixed;
+    top: 10px;
+    right: 10px;
+    width:35px;
+}
+.pgone .body{
+    margin-top: 7px;
+}
+
+.pgone .body .qipao{
+    width: 65%;
+    margin-left: 7%;
+    position: absolute;
+    z-index: 100;
+}
+.pgone .body .qipao .two{
+    position: absolute;
+    top: 16%;
+    left: 29%;
+    width: 35%;
+}
+.pgone .body .qipao .guafen{
+    position: absolute;
+    top: 45%;
+    left: 15%;
+    width: 70%;
+}
+.pgone .body .kingman{
+    float: right;
+    width: 18%;
+    margin-right: 12.5%;
+    margin-top: 46px;
+}
+.pgone .body .kingman .man{
+    margin-top:5px;
+}
+.pgone .banner{
+    width:100%;
+}
+.pgone .btnbox{
+    width: 42%;
+    margin-left: 29%;
+    margin-right: 29%;
+    margin-top: 15px;
+}
+.pgtwo{
+    background: url('../images/bgrank.png') no-repeat;
+    background-size: 100%;
+}
+.rule{
+    position: fixed;
+    z-index: 200;
+    top: 50px;
+    left: 10%;
+    width: 80%;
+}
+.fade{
+    animation: fade 7s linear;
+    -webkit-animation: fade 7s linear;
+    -webkit-animation-fill-mode: both;
+    animation-fill-mode: both;
+}
+@keyframes fade {
+    0%{
+        display: block;
+        opacity: 1;
+    }
+    98%{
+        display: block;
+        opacity: 1;
+    }
+    100%{
+        display: none;
+        opacity: 0;
+    }
+}
+@-webkit-keyframes fade {
+    0%{
+        display: block;
+        opacity: 1;
+    }
+    100%{
+        display: none;
+        opacity: 0;
+    }
+}
+.pgtwo .head{
+    width: 65%;
+    margin-left: 15%;
+}
+.pgtwo .head img{
+    float: left;
+}
+.pgtwo .head:after{
+    content: '';
+    display: block;
+    clear: both;
+}
+.pgtwo .head:before{
+    content: '';
+    display: table;
+}
+.pgtwo .head .wingleft{
+    width:18%;
+    margin-top:50px;
+    margin-right:1%;
+}
+.pgtwo .head .wingright{
+    width:15%;
+    margin-top:65px;
+    margin-left:1%;
+}
+.pgtwo .head .kinggame{
+    width:65%;
+}
+.pgtwo .body .man{
+    width: 23%;
+    margin-left: 37%;
+    margin-top: 30px;
+    float: left;
+}
+.pgtwo .body .manjump{
+    width: 31%;
+    margin-left:33%;
+    margin-top:47px;
+}
+@keyframes jump {
+    0%{
+        margin-bottom: 0px;
+        margin-top:47px;
+    }
+    100%{
+        margin-bottom: 47px;
+        margin-top:0px;
+    }
+}
+@-webkit-keyframes jump {
+    0%{
+        margin-bottom: 0px;
+        margin-top:47px;
+    }
+    100%{
+        margin-bottom: 47px;
+        margin-top:0px;
+    }
+}
+.jump{
+    animation: jump .5s linear;
+    -webkit-animation: jump .5s linear;
+    animation-fill-mode: both;
+    -webkit-animation-fill-mode: both;
+}
+.pgtwo .body .hard{
+    width: 35%;
+    vertical-align: top;
+    margin-left: -15px;
+    margin-top: 25px;
+}
+.pgtwo .body .wall{
+    width: 70%;
+    margin: 0 auto;
+}
+.pgtwo .btnbox{
+    width:42%;
+    margin:0 auto;
+    margin-top: 15px;
+}
+.pgthree{
+    background: url('../images/bgsign.png') no-repeat;
+    background-size: 100%;
+}
+.pgthree .head{
+    width: 95%;
+    margin: 0 auto;
+    margin-top: 12px;
+}
+.pgthree .king{
+    width: 95%;
+    margin: 0 auto;
+    margin-top: 12px;
+}
+.pgthree .inputbox {
+    width:100%;
+    margin-top:10px;
+}
+.pgthree .inputbox div{
+    width:100%;
+    margin-bottom: 5px;
+    height:50px;
+    line-height: 50px;
+    vertical-align: middle;
+    /*background: url("../images/input.png") no-repeat;*/
+    /*background-size: 100% 100%;*/
+}
+.pgthree .inputbox div.tipsbox{
+    width:100%;
+    margin-bottom: 5px;
+    height:50px;
+    line-height: 50px;
+    vertical-align: middle;
+    text-align: left;
+    margin-left: 30px;
+}
+.pgthree .inputbox div p{
+    width: 80%;
+    color: #feda02;
+    font-size: 1em;
+    margin: 0 auto;
+    padding: 5px 0;
+    text-align: left;
+    height:50px;
+    line-height: 50px;
+    vertical-align: middle;
+}
+.pgthree .inputbox div p span{
+    display: inline-block;
+    width: 20%;
+    height:50px;
+    line-height: 50px;
+    vertical-align: middle;
+}
+.pgthree .inputbox div input,.pgthree .inputbox div input:focus{
+    border: 0;
+    background-color: transparent;
+    box-shadow: none;
+    height:50px;
+    line-height: 50px;
+    outline: 0;
+    width: 72%;
+    font-size: 1em;
+    color: #feda02;
+    vertical-align: middle;
+}
+.pgthree .inputbox div.tipsbox input,.pgthree .inputbox div.tipsbox input:focus{
+    border: 0;
+    background-color: transparent;
+    box-shadow: none;
+    height: 20px;
+    line-height: 20px;
+    outline: 0;
+    width: 8%;
+    font-size: 1em;
+    color: #feda02;
+    vertical-align: middle;
+}
+.pgthree .btnbox{
+    width:42%;
+    margin:0 auto;
+    margin-top: 15px;
+}
+.pgfour{
+    background: url('../images/bgshare.png') no-repeat;
+    background-size: 100%;
+}
+.pgfour .head{
+    width:95%;
+    margin:0 auto;
+    margin-top: 12px;
+    margin-bottom: 5px;
+}
+.progress{
+    width:70%;
+    margin:0 auto;
+}
+.progress .qp{
+    background: url(../images/qpshare.png) no-repeat;
+    background-size: 100% 100%;
+    width: 48px;
+    height: 60px;
+    margin-left: 5%;
+    position: relative;
+    left: -27px;
+}
+.progress .qp .rank{
+    display: inline-block;
+    width: 48px;
+    box-sizing: border-box;
+    text-align: center;
+    line-height: 52px;
+    font-size: .8em;
+    font-weight: bold;
+}
+.progress .bar{
+    height: 24px;
+    box-sizing: border-box;
+    margin: 4px auto;
+    border: 3px solid #000000;
+    border-radius: 12px;
+    background-color: #212121;
+    overflow: hidden;
+}
+.progress .bar .failbar{
+    width:70%;
+    background-color: #0BB20C;
+    height: 18px;
+    border-top-left-radius: 10px;
+    border-bottom-left-radius: 10px;
+    float: left;
+    box-sizing: border-box;
+
+}
+.progress .bar .succbar{
+    width:30%;
+    background-color: #ac2925;
+    height: 18px;
+    border-top-right-radius: 10px;
+    border-bottom-right-radius: 10px;
+    float: left;
+    box-sizing: border-box;
+}
+.progress .bar .failbar .barreal{
+    width: 5%;
+    height: 18px;
+    border-radius: 10px;
+    background-image: linear-gradient(180deg,#44daff,#0b84ff);
+    clear: both;
+}
+.progress .bar .succbar .barreal {
+    width: 0;
+    height: 18px;
+    background-image: linear-gradient(180deg,#44daff,#0b84ff);
+    clear: both;
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+    border-top-right-radius: 10px;
+    border-bottom-right-radius: 10px;
+}
+
+.rankbox h3,.rankbox p{
+    margin: 0;
+    padding: 0;
+    text-decoration: none;
+    color: #000;
+    font-size: 1em;
+    text-align: center;
+    line-height: 1.3em;
+}
+.pgfour .count{
+    color: #f6e442;
+}
+.pgfour .takecard{
+    width: 83%;
+    margin: 5px auto;
+}
+.pgfour .btnbox{
+    width:58%;
+    margin:5px auto;
+}
+.pgfour .share{
+    background-color: rgba(0,0,0,0.8);
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    z-index: 200;
+}
+.pghelpone{
+    background: url('../images/bgrank.png') no-repeat;
+    background-size: 100%;
+}
+.pghelpone .banner{
+    width: 100%;
+    margin-top: 12px;
+}
+.pghelpone .head{
+    width: 75%;
+    margin: 10px auto;
+}
+.pghelpone .helpbox .men{
+    width: 23%;
+    float: left;
+    margin-left: 38%;
+    margin-top: 35px;
+}
+.pghelpone .helpbox .qpout{
+    width: 33%;
+    margin-top: 15px;
+    position: relative;
+    left: -20px;
+}
+.pghelpone .helpbox .wall{
+    width:65%;
+    margin:0 auto;
+}
+.pghelpone .btnbox{
+    width:42%;
+    margin:0 auto;
+    margin-top: 15px;
+}
+.pghelptwo{
+    background: url('../images/bgshare.png') no-repeat;
+    background-size: 100%;
+}
+.pghelptwo .head{
+    width:95%;
+    margin:0 auto;
+    margin-top: 12px;
+}
+.pghelptwo .kingbox{
+    width: 70%;
+    padding: 10px 5px;
+    background: url(../images/kingrank.png) no-repeat;
+    background-size: 100%;
+    margin: 0 auto;
+    margin-top: 15px;
+}
+.pghelptwo .btnbox{
+    width:42%;
+    margin:0 auto;
+    margin-top: 10px;
+}
+.pghelptwo .rankbox h3,.pghelptwo .rankbox p,.pghelptwo .rankbox h3 a{
+    margin:0;
+    padding: 0;
+    text-decoration: none;
+    color: #000;
+    font-size: 1.2em;
+    text-align: center;
+    line-height: 1.8em;
+}
+.pghelptwo .progress{
+    margin-top: 2px;
+}
+.pghelptwo .rankbox{
+    margin-bottom: 50px;
+}
+.pghelptwo .count{
+    color: #f6e442;
+}
+
+
+
+
+

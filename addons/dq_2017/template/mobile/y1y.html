@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1, user-scalable=no">
+    <meta name="renderer" content="webkit">
+    <meta content="telephone=no" name="format-detection">
+    <link rel="stylesheet" href="../addons/dq_2017/template/mobile/fourYearSrc/css/plane.css">
+    <link rel="stylesheet" href="../addons/dq_2017/template/mobile/fourYearSrc/css/layer.css">
+    <title>邀请同行赢红包</title>
+</head>
+<body>
+<h1 id="status"></h1>
+</body>
+<script>
+    var shake=4000,
+        last_update=0,
+        count=0,
+        x=y=z=last_x=last_y=last_z=0;
+    if(window.DeviceMotionEvent){
+        window.addEventListener("devicemotion",deviceMotionHandler,false);
+    }else{
+        alert("本设备不支持devicemotion事件");
+    }
+    console.log(new Date().valueOf());
+    function deviceMotionHandler(eventData){
+        var acceleration = eventData.accelerationIncludingGravity,
+            currTime=new Date().valueOf(),
+            diffTime=currTime-last_update;
+
+        if(diffTime>100){
+            last_update=currTime;
+            x=acceleration.x;
+            y=acceleration.y;
+            z=acceleration.z;
+            var speed=Math.abs(x+y+z-last_x-last_y-last_z)/diffTime*10000
+            var status=document.getElementById("status");
+            if(speed>shake){
+                count++;
+                status.innerHTML = "你摇了中"+count+"次" ;
+            }
+            last_x = x;
+            last_y = y;
+            last_z = z;
+        }
+    }
+</script>
+</html>

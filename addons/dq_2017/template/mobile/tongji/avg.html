@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html style="height: 100%">
+   <head>
+       <meta charset="utf-8">
+   </head>
+   <body style="height: 100%; margin: 0">
+       <div id="container" style="height: 100%"></div>
+       <script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts/echarts-all-3.js"></script>
+       <script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts-stat/ecStat.min.js"></script>
+       <script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts/extension/dataTool.min.js"></script>
+       <script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts/map/js/china.js"></script>
+       <script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts/map/js/world.js"></script>
+       <script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=ZUONbpqGBsYGXNIYHicvbAbM"></script>
+       <script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts/extension/bmap.min.js"></script>
+
+
+       <script src='../addons/dq_2017/template/mobile/fourYearSrc/js/jquery-1.11.3.js'></script>
+
+       <script>
+           function ceshi(){
+               $.ajax({
+                   type:'GET',
+                   url:'http://2nd.sagabuy.com/app/index.php?i=2&c=entry&do=rank100&m=dq_2017&dc=1',
+                   success:function(data) {
+                       alert('更新成功');
+                       window.location = window.location.href+'&s='+Math.random();
+                   }
+               })
+           }
+       </script>
+
+       <div><button onclick="ceshi()">点击更新缓存</button></div>
+        <div>
+       <script>
+
+           var myArray=new Array();
+           for (i=0;i<100;i++){
+               myArray[i] = i+1;
+           }
+
+           $.ajax({
+               type:'GET',
+               url:'http://2nd.sagabuy.com/app/index.php?i=2&c=entry&do=rank100&m=dq_2017',
+               success:function(data) {
+                  var res = JSON.parse(data);
+console.log(myArray);
+                   var dom = document.getElementById("container");
+                   var myChart = echarts.init(dom);
+                   var app = {};
+                   option = null;
+
+
+                   option = {
+                       title : {
+                           text: '去除加速器排名票数&&人均成本',
+                           subtext: '',
+
+                       },
+                       tooltip : {
+                           trigger: 'axis'
+                       },
+                       legend: {
+                           data:['票数','人均成本']
+                       },
+                       toolbox: {
+                           show : true,
+                           feature : {
+                               mark : {show: true},
+                               dataView : {show: true, readOnly: false},
+                               magicType : {show: true, type: ['line', 'bar']},
+                               restore : {show: true},
+                               saveAsImage : {show: true}
+                           }
+                       },
+                       calculable : true,
+                       xAxis : [
+                           {
+                               type : 'category',
+                               boundaryGap : false,
+                               data : myArray,
+                               axisLabel : {
+                                   interval:0 ,
+                                   formatter:function(val){
+                                       return val.split("").join("\n");
+                                   }
+
+//                                   formatter: '{value} 名'
+                               }
+                           }
+                       ],
+                       yAxis : [
+                           {
+                               type : 'value',
+                               axisLabel : {
+                                   formatter: '{value}'
+                               }
+                           }
+                       ],
+                       series : [
+                           {
+                               name:'票数',
+                               type:'line',
+                               data:res['rank'],
+                               markPoint : {
+                                   data : [
+                                       {type : 'max', name: '最大值'},
+                                       {type : 'min', name: '最小值'}
+                                   ]
+                               },
+                               markLine : {
+                                   data : [
+                                       {
+                                           type : 'average',
+                                           name: '平均值',
+
+                                       },
+                                       {
+                                           name: 'y 轴值为 12 的水平线',
+                                           yAxis: 12
+                                       },
+
+                                       {
+                                           name: 'x1',
+                                           yAxis: res['x1']
+                                       },
+
+                                       {
+                                           name: 'x2',
+                                           yAxis: res['x2']
+                                       },
+
+                                   ]
+                               }
+                           },
+                           {
+                               name:'人均成本',
+                               type:'line',
+                               data:res['avgs'],
+                               markPoint : {
+                                   data : [
+                                       {type : 'max', name: '最大值'},
+                                       {type : 'min', name: '最小值'}
+                                   ]
+                               },
+                               markLine : {
+                                   data : [
+
+                                       {type : 'average', name : '平均值'},
+
+                                       {
+                                           name: 'y 轴值为 12 的水平线',
+                                           yAxis: 12
+                                       },
+
+                                       {
+                                           name: 'x1',
+                                           yAxis: res['x1']
+                                       },
+
+                                       {
+                                           name: 'x2',
+                                           yAxis: res['x2']
+                                       },
+                                   ]
+                               }
+                           }
+                       ]
+                   };
+
+                   if (option && typeof option === "object") {
+                       myChart.setOption(option, true);
+                   }
+               }
+           });
+       </script>
+        </div>
+       <script type="text/javascript">
+
+
+
+       </script>
+
+
+
+
+   </body>
+</html>

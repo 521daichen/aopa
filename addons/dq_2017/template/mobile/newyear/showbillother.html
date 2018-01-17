@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1, user-scalable=no">
+    <meta name="renderer" content="webkit">
+    <meta content="telephone=no" name="format-detection">
+    <link rel="stylesheet" href="../addons/dq_2017/template/mobile/newyear/css/weui.css">
+    <link rel="stylesheet" href="../addons/dq_2017/template/mobile/newyear/css/main.css">
+    <!--<link rel="stylesheet" href="css/weui.css">-->
+    <title>晒购物小票 赢新年红包</title>
+</head>
+<body ontouchstart>
+<div class="header">
+    <img src="../addons/dq_2017/template/mobile/newyear/images/top.png" alt="">
+</div>
+<div class="container">
+    <div class="title">
+        <h2>您的土豪朋友xxx晒出</h2>
+        <h2>消费18888元的购物小票</h2>
+    </div>
+    <div class="friendbill">
+        <img src="../addons/dq_2017/template/mobile/newyear/images/p2.png" class="infoimg" alt="">
+    </div>
+    <div class="activity">
+        <img src="../addons/dq_2017/template/mobile/newyear/images/a1.png" class="act-img" alt="">
+        <a href="http://mswechat.mebaby.cn/app/index.php?i=2&c=entry&do=begin&m=dq_2017"><img src="../addons/dq_2017/template/mobile/newyear/images/a2.png" class="act-img" alt=""></a>
+        <a href="http://mswechat.mebaby.cn/app/index.php?i=2&c=entry&do=Jd&m=dq_2017"><img src="../addons/dq_2017/template/mobile/newyear/images/a3.png" class="act-img" alt=""></a>
+    </div>
+</div>
+<script src="http://res.wx.qq.com/open/js/jweixin-1.2.0.js"></script>
+<script src='../addons/dq_2017/template/mobile/newyear/js/jq.js'></script>
+<!--<script src='../addons/dq_2017/template/mobile/newyear/js/share.js'></script>-->
+<script>
+    wx.config({
+        debug: false,
+        appId: "{$_W['account']['jssdkconfig']['appId']}",
+        timestamp: "{$_W['account']['jssdkconfig']['timestamp']}",
+        nonceStr: "{$_W['account']['jssdkconfig']['nonceStr']}",
+        signature: "{$_W['account']['jssdkconfig']['signature']}",
+        jsApiList: [
+            'checkJsApi',
+            'onMenuShareTimeline',
+            'onMenuShareAppMessage',
+            'hideMenuItems',
+            'showMenuItems',
+            'hideAllNonBaseMenuItem',
+            'showAllNonBaseMenuItem',
+            'translateVoice',
+            'startRecord',
+            'stopRecord',
+            'onVoiceRecordEnd',
+            'playVoice',
+            'onVoicePlayEnd',
+            'pauseVoice',
+            'stopVoice',
+            'uploadVoice',
+            'downloadVoice',
+            'chooseImage',
+            'previewImage',
+            'uploadImage',
+            'downloadImage',
+            'getNetworkType',
+            'openLocation',
+            'getLocation',
+            'hideOptionMenu',
+            'showOptionMenu',
+            'closeWindow',
+            'scanQRCode',
+            'chooseWXPay',
+            'openProductSpecificView',
+            'addCard',
+            'chooseCard',
+            'openCard'
+        ]
+    });
+
+    function orshare() {
+        var url = window.location.href;
+        var sharetitle = '';
+        var sharedec = '';
+        wx.onMenuShareAppMessage({
+            title: sharetitle, // 分享标题
+            link: url, // 分享链接
+            imgUrl: 'http://mswechat.mebaby.cn/addons/dq_2017/template/mobile/newyear/images/share.png', // 分享图标
+            desc: sharedec, // 分享描述
+            success: function (res) {
+                console.log('成功分享到朋友');
+            }
+
+        });
+        wx.onMenuShareTimeline({
+            title: sharetitle, // 分享标题
+            link: url, // 分享链接
+            imgUrl: 'http://mswechat.mebaby.cn/addons/dq_2017/template/mobile/newyear/images/share.png', // 分享图标
+            success: function (res) {
+                console.log('成功分享到朋友圈');
+            }
+        });
+    }
+
+    wx.ready(function () {
+        wx.hideMenuItems({
+            menuList: ["menuItem:editTag", "menuItem:delete", "menuItem:copyUrl", "menuItem:originPage", "menuItem:readMode", "menuItem:openWithQQBrowser", "menuItem:openWithSafari", "menuItem:share:email",
+                "menuItem:share:qq", "menuItem:share:weiboApp", "menuItem:favorite", "menuItem:share:facebook", "menuItem:share:QZone"
+            ] // 要隐藏的菜单项，只能隐藏“传播类”和“保护类”按钮，所有menu项见附录3
+        });
+        orshare();
+    });
+</script>
+<script>
+    var _mtac = {};
+    (function() {
+        var mta = document.createElement("script");
+        mta.src = "http://pingjs.qq.com/h5/stats.js?v2.0.2";
+        mta.setAttribute("name", "MTAH5");
+        mta.setAttribute("sid", "500568866");
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(mta, s);
+    })();
+</script>
+
+</body>
+</html>

@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport"  content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <meta name="renderer" content="webkit">
+<meta content="telephone=no" name="format-detection">
+    <title>车牌当钱花 到店送300</title>
+	<style>
+			body{
+				margin:0;
+				padding: 0;
+				width: 100%;
+				height: 100%;
+				background: url('../addons/dq_2017/template/mobile/car4card/images/bg.png') no-repeat;
+				background-size: 100%;
+				background-color: #fec0c9;
+			}
+			header{
+				width: 100%;
+				height: 40%;
+			}
+			img{
+				width: 100%;
+				height:auto;
+			}
+			.card{
+			    width: 86%;
+			    margin:2% 7%;	
+			}
+			.card img{height: auto !important;}
+			.activity{
+				width: 76%;
+			    margin-right: 12%;
+			    margin-left: 12%;
+			    box-sizing: border-box;
+			    padding: 3% 0%;
+			}
+			.det{
+				width: 30%;
+    			margin: 1% 0%;
+			}
+			.activity>div{
+				font-size: 12px;
+				color: #545454;
+			}
+			.activity>div>p{
+				margin: 0;
+				padding: 0;
+				margin-top: 2%;
+				font-size: 12px;
+			}
+			.activity>div span{
+				color:#f60;
+				float:right;
+				text-decoration: underline;
+			}
+			.carId{
+			    width: 76%;
+			    height: 50%;
+			    margin-right: 12%;
+			    margin-left: 12%;
+			    box-sizing: border-box;
+			    padding: 3% 0%;
+			    background: rgba(255,255,255,0.3);
+			    border-radius: 10px;
+				
+			}
+			input {
+			    width: 100%;
+			    height: 35px;
+			    line-height: 35px;
+			    border-radius: 5px;
+			    box-sizing: border-box;
+			    border: 1px solid #ddd;
+		        border-top: 1px solid #ddd;
+			    color: #999;
+			    font-size: 12px;
+			    font-family: "microsoft sans serif";
+			    box-shadow: none;
+			    background: #FFF;
+			    outline:none; 
+			    -webkit-appearance: none;
+			    padding-left: 2%;
+			}
+			form{
+				width: 86%;
+   				 margin-left: 7%;
+			}
+			p{
+				width: 100%;
+			    margin: 2% 1%;
+			    padding: 0;
+			    font-size: 14px;
+			    font-family: "microsoft sans serif";
+			}
+			h5{
+				padding: 0;
+			    margin: 2% 6%;
+			    font-weight: normal;
+			    width: 88%;
+			}
+			#btn{
+				width: 86%;
+			    height: 35px;
+			    line-height: 35px;
+			    background: #ff4764;
+			    color: #FFF;
+			    text-align: center;
+			    margin-top: 6%;
+			    margin-left: 7%;
+			    margin-bottom: 3%;
+			    border-radius: 5px;
+			}
+			#ruledet .det{
+				width: 55%;
+    			margin: 1% 0%;
+			}
+			#ruledet h4{
+				margin: 2% 0%;
+    			font-size: 14px;
+			}
+			#ruledet p{
+				margin:1% 0%;
+				font-size: 12px;
+			}
+			#ruledet{
+				position: absolute;
+				width: 100%;
+				height: 170%;
+				background:rgba(0,0,0,0.8);	
+			    top: 0;
+				bottom: 0;
+				left: 0;
+				right: 0;
+				z-index: 555;
+				/*height: 850px;*/
+			}
+			#ruledet>div{
+				width: 86%;
+			    margin-top: 15%;
+			    margin-left: 7%;
+			    position: relative;
+			    background: #d1ecfa;
+			    border-radius: 5px;
+			    padding: 4% 6%;
+			    box-sizing: border-box;
+			}
+			#ruledet>div>span{
+			    position: absolute;
+			    right: -3%;
+			    top: -2%;
+			    width: 10%;
+			}
+			#ruledet>div>div{
+				font-size: 12px;
+			}
+			.hidden{
+				display: none;
+			}
+			.mask{background:rgba(0,0,0,0.8);width:100%;height:100%;position: fixed;left:0;top:0;display: none;z-index: 999;}
+			@media screen and (max-width:320px) {
+				#ruledet {
+					height: 250%;
+				}
+			}
+		</style>
+</head>
+<body>
+	<input type="hidden" id="openid" name="openid" value="{$openid}" />
+	<header>
+		<img src="../addons/dq_2017/template/mobile/car4card/images/cardhead.png"/>
+	</header>
+	<div class='card'>
+		<img src="../addons/dq_2017/template/mobile/car4card/images/coupon.png" id='btn' />
+	</div>
+	<div id='userPrt' class='carId'>
+		<form>
+			<p>姓名</p><input id='userName' type="text" readonly="readonly" value='{$info['name']}' />
+			<p>电话</p><input id='userPhone' type="text" readonly="readonly" value='{$info['tel']}' />
+			<p>车牌号</p><input id='userCar' type="text" readonly="readonly"  value='{$info['platenumber']}' />
+		</form>
+		<div id='btn' onclick="$('.mask').css('display','block');">呼朋唤友来领卡</div>
+	</div>
+
+	
+	<div class='activity'>
+		<img src="../addons/dq_2017/template/mobile/car4card/images/det.png" alt="" class='det'/>
+		
+		<div>
+			凭本人手机上显示的电子卡，及车辆行驶证原件来民生百货解放路店或骡马市店会员中心（行驶证须真实有效且与登记的车牌号信息一致）登记成为民生会员，即可兑换300元跨年卡。<br />
+			使用时限: 2017年12月30日- 2018年1月1日<br />
+			解放路店咨询电话：029-87481826<br />
+			骡马市店咨询电话：029-87656505<br />
+			<p>
+				<span onclick="seendet()">查看活动规则</span>
+			</p>
+		</div>
+		<div id='ruledet' class='hidden' onclick='hiddendet()'>
+			<div onclick='hiddendet()'>
+				<img src="../addons/dq_2017/template/mobile/car4card/images/det2.png" alt="" class='det'/>
+				<span onclick='hiddendet()'><img src="../addons/dq_2017/template/mobile/car4card/images/close.png" alt="" /></span>
+				<div>
+					<h4>哪些人能领卡：</h4>
+					咸阳、宝鸡、铜川、渭南、延安、榆林、安康、汉中、商洛、杨凌等地市及外省顾客；<br/>
+
+					<h4>领卡要求：</h4>
+					1、“陕A车牌以外”非营运车辆用途的个人车主可领取 （营运车辆、公务用车、货运等特殊用途车辆除外，以行驶证上“所有人”、“使用性质”及车辆照片为判断依据）<br/>
+					2、每人/每车牌号/每手机号/每微信号（同时满足）限领1次300元民生百货"跨年卡"
+
+					<h4>用卡说明：</h4>
+					<p>* 使用本"跨年卡"（后简称“卡”）结算时，须领卡本人出示手机上显示的卡，并验证捆绑的同车号车辆行驶证原件（须真实有效）、领卡人有效身份证原件等领卡信息。电子跨年卡转发、截图均无效；</p>
+					<p>* 本卡含100元购物券3张可于2017年12月30日-2018年1月1日，在民生百货解放路店服饰类现金部分逢300使用一张或珠宝类逢1000元一张。</p>
+					<p>* 同一用户限领一次，凡满足同一微信号、同一车牌号、同一手机号、同一手机设备中任意一个条件，即视为同一用户。</p>
+					<p>* 用本卡购买的商品，如遇退换货，仅退还实际支付金额，卡不予补发。</p>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="mask" onclick="this.style.display = 'none'">
+		<img src="../addons/dq_2017/template/mobile/car4card/images/tips.png" />
+	</div>
+
+<script src="../addons/dq_2017/template/mobile/car4card/js/jquery-1.11.3.js"></script>
+<script src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
+<script type="text/javascript">
+	var openid=$('#openid').val();
+	//规则显示隐藏
+    function seendet(){
+    	$('body').scrollTop(0);
+    	$('#ruledet').removeClass('hidden');
+    }
+    function hiddendet(){
+    	$('#ruledet').addClass('hidden');
+    }
+    wx.config({
+        debug: false,
+        appId: "{$_W['account']['jssdkconfig']['appId']}",
+        timestamp: "{$_W['account']['jssdkconfig']['timestamp']}",
+        nonceStr: "{$_W['account']['jssdkconfig']['nonceStr']}",
+        signature: "{$_W['account']['jssdkconfig']['signature']}",
+        jsApiList: [
+            'checkJsApi',               // 判断当前客户端版本是否支持指定JS接口
+            'onMenuShareTimeline',      // 分享到朋友圈
+            'onMenuShareAppMessage',    // 分享给朋友
+            'onMenuShareQQ',            // 分享到QQ
+            'onMenuShareWeibo',         // 分享到腾讯微博
+            'hideMenuItems',            // 批量隐藏功能按钮接口
+            'showMenuItems',            // 批量显示功能按钮接口
+            'hideAllNonBaseMenuItem',   // 隐藏所有非基础按钮接口
+            'showAllNonBaseMenuItem',   // 显示所有功能按钮接口
+            'getNetworkType',           // 获取网络状态接口
+            'openLocation',             // 使用微信内置地图查看位置接口
+            'getLocation',              // 获取地理位置接口
+            'hideOptionMenu',           // 批量隐藏功能按钮接口
+            'showOptionMenu',           // 批量显示功能按钮接口
+            'closeWindow',              // 关闭当前网页窗口接口
+            'addCard',                  // 批量添加卡券接口
+            'chooseCard',               // 调起适用于门店的卡券列表并获取用户选择列表
+            'openCard',                 // 查看微信卡包中的卡券接口
+            'chooseImage',
+            'previewImage',
+            'uploadImage',
+            'downloadImage'
+        ]
+    });
+	
+    wx.ready(function() {
+    	var sharetitle="震惊！民生百货送300元跨年卡邀你来跨年，壕无人性!";
+		var sharedec="民生百货为答谢远程顾客厚爱，点此领卡后，元旦假期期间持车辆行驶证来解放路、兴正元民生，300元电子跨年卡当钱花。";
+        document.querySelector('#btn').onclick = function () {
+            var code = '{$code}';
+            var cardid = '{$cardid}'
+            wx.openCard({
+                cardList: [{
+                    cardId: cardid,
+                    code: code
+                }]// 需要打开的卡券列表
+            });
+        }
+        wx.onMenuShareTimeline({
+	       title: sharetitle, // 分享标题
+	       link: 'http://mswechat.mebaby.cn/app/index.php?i=2&c=entry&do=begin&m=dq_2017&typea=1&wxref=mp.weixin.qq.com', // 分享链接
+	       imgUrl: 'http://mswechat.mebaby.cn/addons/dq_2017/template/mobile/road38/images/share.png', // 分享图标
+	       success: function (res) {
+
+	       }
+	   });
+		// 分享给朋友
+       wx.onMenuShareAppMessage({
+           title: sharetitle, // 分享标题
+           desc:  sharedec, // 分享描述
+           link: 'http://mswechat.mebaby.cn/app/index.php?i=2&c=entry&do=begin&m=dq_2017&typea=1&wxref=mp.weixin.qq.com', // 分享链接
+           imgUrl: 'http://mswechat.mebaby.cn/addons/dq_2017/template/mobile/car4card/images/share.png', // 分享图标
+           success: function (res) {
+
+           }
+       });
+    });
+
+</script>
+	<script>
+        var _mtac = {};
+        (function() {
+            var mta = document.createElement("script");
+            mta.src = "http://pingjs.qq.com/h5/stats.js?v2.0.2";
+            mta.setAttribute("name", "MTAH5");
+            mta.setAttribute("sid", "500568861");
+            var s = document.getElementsByTagName("script")[0];
+            s.parentNode.insertBefore(mta, s);
+        })();
+	</script>
+
+</body>
+</html>

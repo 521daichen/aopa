@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport"  content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1, user-scalable=no">
+    <meta name="renderer" content="webkit">
+    <meta content="telephone=no" name="format-detection">
+    <link rel="stylesheet" href="../addons/dq_2017/template/mobile/jinzhuan/css/swiper.min.css">
+    <link rel="stylesheet" href="../addons/dq_2017/template/mobile/jinzhuan/css/main.css">
+    <link rel="stylesheet" href="../addons/dq_2017/template/mobile/fourYearSrc/css/layer.css">
+    <title>给我点赞</title>
+</head>
+<body>
+<input type="hidden" id="uid" name="uid" value="{$user['id']}" />
+<input type="hidden" id="zuid" name="zuid" value="{$zuid}" />
+<input type="hidden" id="shareid" name="shareid" value="{$shareid}" />
+<input type="hidden" id="way" name="way" value="{$way}" />
+<input type="hidden" id="boci" name="boci" value="{$boci}" />
+<div class="swiper-container">
+    <div class="swiper-wrapper">
+        <div class="swiper-slide pghelpone">
+            <div class="banner">
+                <img src="../addons/dq_2017/template/mobile/jinzhuan/images/footbanner.png" alt="">
+            </div>
+            <div class="head">
+                <img src="../addons/dq_2017/template/mobile/jinzhuan/images/kingout.png" alt="">
+            </div>
+            <div class="helpbox">
+                <img class='men' src="../addons/dq_2017/template/mobile/jinzhuan/images/manout.png" alt="">
+                <img class='qpout' src="../addons/dq_2017/template/mobile/jinzhuan/images/qpout.png" alt="">
+                <img class='wall' src="../addons/dq_2017/template/mobile/jinzhuan/images/wall.png" alt="">
+            </div>
+            <div class="btnbox" id="helpcheer">
+                <img class='btnhelpone' src="../addons/dq_2017/template/mobile/jinzhuan/images/btngame.png" alt="">
+            </div>
+        </div>
+        <div class="swiper-slide pghelptwo">
+            <div class="head">
+                <img src="../addons/dq_2017/template/mobile/jinzhuan/images/head.png" alt="">
+            </div>
+            <!--<div class="kingbox">-->
+                <!--<div class="progress">-->
+                    <!--<div class="qp" id="qpzhanbi">-->
+                        <!--<span class="rank zhanbi" id="qprank">1%</span>-->
+                    <!--</div>-->
+                    <!--<div class="bar">-->
+                        <!--<div class="failbar">-->
+                            <!--<div class="barreal" id="failbarzhanbi"></div>-->
+                        <!--</div>-->
+                        <!--<div class="succbar">-->
+                            <!--<div class="barreal" id="succbarzhanbi"></div>-->
+                        <!--</div>-->
+
+                    <!--</div>-->
+                <!--</div>-->
+                <div class="rankbox">
+                    <h3>你的好友目前累计了</h3>
+                    <h3><span class="count" id="cheerCount"></span>个金砖</h3>
+                    <p>超过了 <span class="rank zhanbi" id="decrank">1</span>个土豪</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<script src='../addons/dq_2017/template/mobile/jinzhuan/js/jquery-1.11.3.js'></script>
+<script src="http://res.wx.qq.com/open/js/jweixin-1.2.0.js"></script>
+<script src="../addons/dq_2017/template/mobile/jinzhuan/js/swiper.js"></script>
+<script src="../addons/dq_2017/template/mobile/jinzhuan/js/cheer.js"></script>
+<script src="../addons/dq_2017/template/mobile/fourYearSrc/js/layer.js"></script>
+<script>
+    wx.config({
+        debug: false,
+        appId: "{$_W['account']['jssdkconfig']['appId']}",
+        timestamp: "{$_W['account']['jssdkconfig']['timestamp']}",
+        nonceStr: "{$_W['account']['jssdkconfig']['nonceStr']}",
+        signature: "{$_W['account']['jssdkconfig']['signature']}",
+        jsApiList: [
+            'checkJsApi',
+            'onMenuShareTimeline',
+            'onMenuShareAppMessage',
+            'hideMenuItems',
+            'showMenuItems',
+            'hideAllNonBaseMenuItem',
+            'showAllNonBaseMenuItem',
+            'translateVoice',
+            'startRecord',
+            'stopRecord',
+            'onVoiceRecordEnd',
+            'playVoice',
+            'onVoicePlayEnd',
+            'pauseVoice',
+            'stopVoice',
+            'uploadVoice',
+            'downloadVoice',
+            'chooseImage',
+            'previewImage',
+            'uploadImage',
+            'downloadImage',
+            'getNetworkType',
+            'openLocation',
+            'getLocation',
+            'hideOptionMenu',
+            'showOptionMenu',
+            'closeWindow',
+            'scanQRCode',
+            'chooseWXPay',
+            'openProductSpecificView',
+            'addCard',
+            'chooseCard',
+            'openCard'
+        ]
+    });
+</script>
+</body>
+</html>

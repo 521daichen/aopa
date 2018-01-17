@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1, user-scalable=no">
+    <meta name="renderer" content="webkit">
+    <meta content="telephone=no" name="format-detection">
+    <link rel="stylesheet" href="../addons/dq_2017/template/mobile/newyear/css/weui.css">
+    <link rel="stylesheet" href="../addons/dq_2017/template/mobile/newyear/css/main.css">
+    <title>晒购物小票 赢新年红包</title>
+</head>
+<body ontouchstart>
+<!--dialog onebtn start -->
+<div class="js_dialog" id="dialogBtn" style="display: none">
+    <div class="weui-mask"></div>
+    <div class="weui-dialog">
+        <div class="weui-dialog__bd" id="dialogBtnContent"></div>
+        <div class="weui-dialog__ft">
+            <a href="javascript:;" class="weui-dialog__btn weui-dialog__btn_primary" id="operate">知道了</a>
+        </div>
+    </div>
+</div>
+<!--dialog onebtn end-->
+<!--loading  start-->
+<div id="loadingToast" style="display: none;">
+    <div class="weui-mask_transparent"></div>
+    <div class="weui-toast">
+        <i class="weui-loading weui-icon_toast"></i>
+        <p class="weui-toast__content" id="loadingContent">提交中</p>
+    </div>
+</div>
+<!--loading end-->
+<div class="share hidden" id="xp">
+    <img src="../addons/dq_2017/template/mobile/newyear/images/p1.png" class='xp' alt="">
+</div>
+<div class="header">
+    <img src="../addons/dq_2017/template/mobile/newyear/images/top.png" alt="">
+</div>
+<div class="container">
+    <div class="infobox">
+        <img src="../addons/dq_2017/template/mobile/newyear/images/t1.png" class="infoimg" alt="">
+        <p class="tips">为了中奖时能联系到您，请您准确填写您的真实信息</p>
+        <div class="info">
+            <p class="infotitle">收款台 <span class="find">哪里找？</span></p>
+            <input class="myinput" type="number"  id="userCashier">
+            <p class="infotitle">交易号 <span class="find">哪里找？</span></p>
+            <input class="myinput" type="number"  id="userTrans">
+            <p class="infotitle">姓名</p>
+            <input class="myinput" type="text"  id="userName">
+            <p class="infotitle">手机号</p>
+            <input class="myinput" type="number"  id="userPhone">
+        </div>
+        <div class="btn-box">
+            <a class="mybtn" href="javascript:;" onclick="namevali()">提交生成分享页</a>
+        </div>
+        <img src="../addons/dq_2017/template/mobile/newyear/images/t2.png" class="infoimg" alt="">
+        <img src="../addons/dq_2017/template/mobile/newyear/images/step.png" class="infoimg" alt="">
+
+    </div>
+    <div class="infobox">
+        <img src="../addons/dq_2017/template/mobile/newyear/images/t3.png" class="infoimg" alt="">
+        <p class="rule">
+全场任意消费即可参与抽奖，每日赢iPhone X等精彩好礼<br/>
+奖项设置：<br/>
+· iPhone X （1份）<br/>
+· 花田巷子6度酒一对 （50份）<br/>
+· 美迪惠尔面膜（100份）<br/>
+· 新年狗年抱枕（15份）<br/>
+· 民生定制笔记本（100份）<br/>
+· 史努比调味三件套（50份）<br/>
+揭晓时间：2018.1.2<br/>
+领奖日期：2018.1.5-1.15<br/>
+领奖地点：民生解放路店4楼会员中心<br/>
+顾客凭当日中奖购物小票及有效身份证明领奖（顾客退货，需退礼品）<br/>
+会员服饰类现金消费满2018元/尊享类现金部分满8018元 晒购物小票参与线上活动，分享至朋友，即送50元全馆通用券。<br/>
+领券时间：12.30-1.1<br/>领券地点：会员中心、小票可累计不拆分，单人最高限领5张，预售及员工不参加活动。<br/>
+代金券使用期限：2018.1.15 - 2018.2.15
+        </p>
+    </div>
+</div>
+
+<script src="http://res.wx.qq.com/open/js/jweixin-1.2.0.js"></script>
+<script src='../addons/dq_2017/template/mobile/newyear/js/jq.js'></script>
+<script src='../addons/dq_2017/template/mobile/newyear/js/weuiAct.js'></script>
+<script src='../addons/dq_2017/template/mobile/newyear/js/newyear.js'></script>
+<script>
+    wx.config({
+        debug: false,
+        appId: "{$_W['account']['jssdkconfig']['appId']}",
+        timestamp: "{$_W['account']['jssdkconfig']['timestamp']}",
+        nonceStr: "{$_W['account']['jssdkconfig']['nonceStr']}",
+        signature: "{$_W['account']['jssdkconfig']['signature']}",
+        jsApiList: [
+            'checkJsApi',
+            'onMenuShareTimeline',
+            'onMenuShareAppMessage',
+            'hideMenuItems',
+            'showMenuItems',
+            'hideAllNonBaseMenuItem',
+            'showAllNonBaseMenuItem',
+            'translateVoice',
+            'startRecord',
+            'stopRecord',
+            'onVoiceRecordEnd',
+            'playVoice',
+            'onVoicePlayEnd',
+            'pauseVoice',
+            'stopVoice',
+            'uploadVoice',
+            'downloadVoice',
+            'chooseImage',
+            'previewImage',
+            'uploadImage',
+            'downloadImage',
+            'getNetworkType',
+            'openLocation',
+            'getLocation',
+            'hideOptionMenu',
+            'showOptionMenu',
+            'closeWindow',
+            'scanQRCode',
+            'chooseWXPay',
+            'openProductSpecificView',
+            'addCard',
+            'chooseCard',
+            'openCard'
+        ]
+    });
+</script>
+
+</body>
+</html>

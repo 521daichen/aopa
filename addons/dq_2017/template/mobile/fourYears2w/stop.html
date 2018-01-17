@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport"  content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1, user-scalable=no">
+    <meta name="renderer" content="webkit">
+    <meta content="telephone=no" name="format-detection">
+    <link rel="stylesheet" href="../addons/dq_2017/template/mobile/fourYearSrc/css/majiang.css">
+    <title>真的感恩 真送两万</title>
+</head>
+<body>
+<input type="hidden" id="uid" name="uid" value="{$user['id']}" />
+<input type="hidden" id="openid" name="uid" value="{$openid}" />
+<input type="hidden" id="zuid" name="zuid" value="{$zuid}" />
+<input type="hidden" id="shareid" name="shareid" value="{$shareid}" />
+<input type="hidden" id="way" name="way" value="{$way}" />
+<input type="hidden" id="boci" name="boci" value="{$boci}" />
+<div class=" pgthree">
+    <div class="head">
+        <img class='logo' src="../addons/dq_2017/template/mobile/fourYearSrc/majiang/logo.png" alt="">
+        <img class='zier' src="../addons/dq_2017/template/mobile/fourYearSrc/majiang/zier.png" alt="">
+    </div>
+    <div class="showbox">
+        <div class="clock">距离第二波段结束：
+            <span id="day">0</span>天<span id="hour">00</span>小时<span id="min">00</span>分<span id="sec">00</span>秒
+        </div>
+        <p class="title">您获得的能量值</p>
+        <div class="cheercountbox">
+            <h1 id="swan">0</h1>
+            <h1 id="wan">0</h1>
+            <h1 id="qian">0</h1>
+            <h1 id="bai">0</h1>
+            <h1 id="shi">0</h1>
+            <h1 id="gei">0</h1>
+        </div>
+        <p>目前排名<span class="count" id="myrank">0</span>&nbsp;&nbsp;超过了 <span class="rank zhanbi" id="decrank">0</span>个参赛者</p>
+        <div class="graycard">
+            <div class="card" id="card"></div>
+        </div>
+
+        <div class="findbtn" id="showhelp">
+            分享获得能量值
+        </div>
+        <div class="findbtn">
+            <a href="https://mp.weixin.qq.com/mp/subscribemsg?action=get_confirm&appid=wxc5c898f251c5fa05&scene=1000&template_id=mZXHWKWbnKkDNNQEcfMsZrr_s7bhJCEcugEs9q5c6T8&redirect_url=http%3A%2F%2Fwx.cnsaga.com&reserved=test#wechat_redirect" style="text-decoration: none">
+                收藏此页面
+            </a>
+        </div>
+    </div>
+    <div class="fast" id="fast">
+        <img src="../addons/dq_2017/template/mobile/fourYearSrc/majiang/fastt.png" alt="">
+    </div>
+    <div class="inputbox showbox hidden" id="updatebox">
+
+        <div class="tips" id="tips">
+            <div class="tipsbox" id="trip" value="0">
+                <img src="../addons/dq_2017/template/mobile/fourYearSrc/majiang/plane.png" alt="">
+                <p class="tag">签证护照</p>
+            </div>
+            <div class="tipsbox" id="car" value="0">
+                <img src="../addons/dq_2017/template/mobile/fourYearSrc/majiang/car.png" alt="">
+                <p class="tag">私家车</p>
+            </div>
+            <div class="tipsbox" id="bank" value="0">
+                <img src="../addons/dq_2017/template/mobile/fourYearSrc/majiang/bank.png" alt="">
+                <p class="tag">银行高端卡</p>
+            </div>
+            <div class="tipsbox" id="mall" value="0">
+                <img src="../addons/dq_2017/template/mobile/fourYearSrc/majiang/member.png" alt="">
+                <p class="tag">商场高端会员</p>
+            </div>
+            <div class="tipsbox"  id='transport' value="0">
+                <img src="../addons/dq_2017/template/mobile/fourYearSrc/majiang/airways.png" alt="">
+                <p class="tag">航空公司金银卡</p>
+            </div>
+            <div class="tipsbox"  id='golf' value="0">
+                <img src="../addons/dq_2017/template/mobile/fourYearSrc/majiang/golf.png" alt="">
+                <p class="tag">高尔夫会所会籍</p>
+            </div>
+            <div class="tipsbox"  id='ownplane' value="0">
+                <img src="../addons/dq_2017/template/mobile/fourYearSrc/majiang/jet.png" alt="">
+                <p class="tag">私人飞机驾照</p>
+            </div>
+            <div class="tipsbox" id="ownship" value="0">
+                <img src="../addons/dq_2017/template/mobile/fourYearSrc/majiang/yacht.png" alt="">
+                <p class="tag">私人游艇驾照</p>
+            </div>
+            <div class="tipsbox" id="nongyao" value="0">
+                <img src="../addons/dq_2017/template/mobile/fourYearSrc/majiang/victory.png" alt="">
+                <p class="tag">最强王者</p>
+            </div>
+        </div>
+        <p id="xianzhi">* 加速器会为你带来额外票数，如获奖须携带您所勾选项对应的有效证件原件，否则该项加速器所增加的能量值作废，重新计算排名获奖结果。</p>
+        <div class="signbtn" onclick="updatefast()">
+            确认修改
+        </div>
+    </div>
+    <div class="showbox">
+        <div class="know">
+            <img src="../addons/dq_2017/template/mobile/fourYearSrc/majiang/know.png" alt="">
+        </div>
+        <div class="takecard">
+            <a id='dq4k'
+               href="http://wx.cnsaga.com/app/index.php?i=4&c=entry&do=prediction4k&m=member&boci={$boci}&pkid={$openid}&ADTAG={$way}">
+                <img src="../addons/dq_2017/template/mobile/fourYearSrc/majiang/banner.png" alt="">
+            </a>
+        </div>
+    </div>
+    <p style="font-size:14px;text-align: center;color:#FDF2B6;margin: 10px auto;">西安赛格国际购物中心</p>
+    <div class="share hidden" id="findhelp">
+        <h1 style="color: #ffffff; line-height: 2em;">分享给朋友 <br>分享到朋友圈<br> 获得更多票数赢两万</h1>
+    </div>
+    <div class="ruledet hidden" id="fastrule">
+        <div class="ruledec">
+            <h3>加速器说明</h3>
+            <p id="fastdec"></p>
+            <div class="close"><img src="../addons/dq_2017/template/mobile/fourYearSrc/majiang/close.png" alt=""></div>
+        </div>
+    </div>
+</div>
+
+<script src='../addons/dq_2017/template/mobile/fourYearSrc/js/jquery-1.11.3.js'></script>
+<script src="http://res.wx.qq.com/open/js/jweixin-1.2.0.js"></script>
+<script>
+    wx.config({
+        debug: false,
+        appId: "{$_W['account']['jssdkconfig']['appId']}",
+        timestamp: "{$_W['account']['jssdkconfig']['timestamp']}",
+        nonceStr: "{$_W['account']['jssdkconfig']['nonceStr']}",
+        signature: "{$_W['account']['jssdkconfig']['signature']}",
+        jsApiList: [
+            'checkJsApi',
+            'onMenuShareTimeline',
+            'onMenuShareAppMessage',
+            'hideMenuItems',
+            'showMenuItems',
+            'hideAllNonBaseMenuItem',
+            'showAllNonBaseMenuItem',
+            'translateVoice',
+            'startRecord',
+            'stopRecord',
+            'onVoiceRecordEnd',
+            'playVoice',
+            'onVoicePlayEnd',
+            'pauseVoice',
+            'stopVoice',
+            'uploadVoice',
+            'downloadVoice',
+            'chooseImage',
+            'previewImage',
+            'uploadImage',
+            'downloadImage',
+            'getNetworkType',
+            'openLocation',
+            'getLocation',
+            'hideOptionMenu',
+            'showOptionMenu',
+            'closeWindow',
+            'scanQRCode',
+            'chooseWXPay',
+            'openProductSpecificView',
+            'addCard',
+            'chooseCard',
+            'openCard'
+        ]
+    });
+    $('#showhelp').click(function(){
+        $('html,body').animate({'scrollTop':'0'},500);
+        $('#findhelp').removeClass('hidden');
+    });
+    $('#findhelp').click(function(){
+        $('#findhelp').addClass('hidden');
+    });
+    wx.ready(function(){
+        // 分享给朋友
+        wx.onMenuShareAppMessage({
+            title: '点击领两万', // 分享标题
+            link: '', // 分享链接
+            imgUrl: 'http://2nd.sagabuy.com/addons/dq_2017/template/mobile/fourYearSrc/images/share.png', // 分享图标
+            desc: '点击领走两万块', // 分享描述
+            success: function (res) {
+
+            }
+        });
+        //分享到朋友圈
+        wx.onMenuShareTimeline({
+            title: '点击领两万', // 分享标题
+            link: '', // 分享链接
+            imgUrl: 'http://2nd.sagabuy.com/addons/dq_2017/template/mobile/fourYearSrc/images/share.png', // 分享图标
+            success: function (res) {
+
+            }
+        });
+    });
+</script>
+
+</body>
+</html>

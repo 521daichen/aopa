@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport"  content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1, user-scalable=no">
+    <meta name="renderer" content="webkit">
+    <meta content="telephone=no" name="format-detection">
+    <link rel="stylesheet" href="../addons/dq_2017/template/mobile/fourYearSrc/css/result.css">
+    <title>真的感恩 真送两万</title>
+</head>
+<body>
+    <div class="head">
+        <img class='logo' src="../addons/dq_2017/template/mobile/fourYearSrc/majiang/logo.png" alt="">
+        <img class='zier' src="../addons/dq_2017/template/mobile/fourYearSrc/majiang/zier.png" alt="">
+    </div>
+    <div class="inputbox">
+        <img class='zhongjiang' src="../addons/dq_2017/template/mobile/fourYearSrc/majiang/img.png" alt="">
+        <div class="resultbox">
+            <p class="btn-end">
+                <a href="http://2nd.sagabuy.com/app/index.php?i=2&c=entry&do=resultone&m=dq_2017">
+                    第一波段&nbsp;中奖结果
+                </a>
+            </p>
+            <p>2017.09.01 —— 2017.09.07</p>
+        </div>
+        <div class="resultbox">
+            <p class="btn-end">
+                <a href="http://2nd.sagabuy.com/app/index.php?i=2&c=entry&ADTAG=2&boci=2&do=fourYears2w&m=dq_2017">
+                    第二波段&nbsp;进行中
+                </a>
+            </p>
+            <p>2017.09.08 —— 2017.09.14</p>
+        </div>
+        <div class="resultbox">
+            <p class="btn-ing">
+                <a href="#">
+                    第三波段&nbsp;未开始
+                </a>
+            </p>
+            <p>2017.09.15 —— 2017.09.21</p>
+        </div>
+        <div class="resultbox">
+            <p class="btn-ing">
+                <a href="#">
+                    第四波段&nbsp;未开始
+                </a>
+            </p>
+            <p>2017.09.22 —— 2017.09.28</p>
+        </div>
+
+    </div>
+    <script src='../addons/dq_2017/template/mobile/fourYearSrc/js/jquery-1.11.3.js'></script>
+    <script src="http://res.wx.qq.com/open/js/jweixin-1.2.0.js"></script>
+    <script>
+        wx.config({
+            debug: false,
+            appId: "{$_W['account']['jssdkconfig']['appId']}",
+            timestamp: "{$_W['account']['jssdkconfig']['timestamp']}",
+            nonceStr: "{$_W['account']['jssdkconfig']['nonceStr']}",
+            signature: "{$_W['account']['jssdkconfig']['signature']}",
+            jsApiList: [
+                'checkJsApi',
+                'onMenuShareTimeline',
+                'onMenuShareAppMessage',
+                'hideMenuItems',
+                'showMenuItems',
+                'hideAllNonBaseMenuItem',
+                'showAllNonBaseMenuItem',
+                'translateVoice',
+                'startRecord',
+                'stopRecord',
+                'onVoiceRecordEnd',
+                'playVoice',
+                'onVoicePlayEnd',
+                'pauseVoice',
+                'stopVoice',
+                'uploadVoice',
+                'downloadVoice',
+                'chooseImage',
+                'previewImage',
+                'uploadImage',
+                'downloadImage',
+                'getNetworkType',
+                'openLocation',
+                'getLocation',
+                'hideOptionMenu',
+                'showOptionMenu',
+                'closeWindow',
+                'scanQRCode',
+                'chooseWXPay',
+                'openProductSpecificView',
+                'addCard',
+                'chooseCard',
+                'openCard'
+            ]
+        });
+        function orshare(){
+            var url=window.location.href;
+            wx.onMenuShareAppMessage({
+                title: '真的感恩，真送两万', // 分享标题
+                link: url, // 分享链接
+                imgUrl: 'http://2nd.sagabuy.com/addons/dq_2017/template/mobile/fourYearSrc/images/share.png', // 分享图标
+                desc: '真的感恩，真送两万-开奖名单', // 分享描述
+                success: function (res) {
+                    console.log('未填信息分享');
+                }
+            });
+            wx.onMenuShareTimeline({
+                title: '真的感恩，真送两万', // 分享标题
+                link: url, // 分享链接
+                imgUrl: 'http://2nd.sagabuy.com/addons/dq_2017/template/mobile/fourYearSrc/images/share.png', // 分享图标
+                success: function (res) {
+                    console.log('未填信息分享');
+                }
+            });
+        }
+        wx.ready(function() {
+            wx.hideMenuItems({
+                menuList: ["menuItem:editTag", "menuItem:delete", "menuItem:copyUrl", "menuItem:originPage", "menuItem:readMode", "menuItem:openWithQQBrowser", "menuItem:openWithSafari", "menuItem:share:email",
+                    "menuItem:share:qq", "menuItem:share:weiboApp", "menuItem:favorite", "menuItem:share:facebook", "menuItem:share:QZone"
+                ] // 要隐藏的菜单项，只能隐藏“传播类”和“保护类”按钮，所有menu项见附录3
+            })
+            orshare();
+        });
+    </script>
+
+
+</body>
+</html>

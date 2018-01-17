@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport"  content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1, user-scalable=no">
+    <meta name="renderer" content="webkit">
+    <meta content="telephone=no" name="format-detection">
+    <link rel="stylesheet" href="../addons/dq_2017/template/mobile/fourYearSrc/css/majiang.css">
+    <title>分享此链接到朋友圈得红包</title>
+</head>
+<body>
+<style>
+	input[type="button"], input[type="submit"], input[type="reset"],input {-webkit-appearance: none;}
+textarea {  -webkit-appearance: none;} 
+.biaodan{width:240px;font-size:14px;margin:0 auto;text-align: left !important;}
+.biaodan input{width:240px;height:2em;padding:0;}
+.biaodan input[type='button']{ background:#B60000;color:#fff;height:3em;font-size:14px;margin:10px auto;}
+</style>
+<input type="hidden" id="uid" name="uid" value="{$user['id']}" />
+<input type="hidden" id="openid" name="uid" value="{$openid}" />
+<input type="hidden" id="zuid" name="zuid" value="{$zuid}" />
+<input type="hidden" id="shareid" name="shareid" value="{$shareid}" />
+<input type="hidden" id="way" name="way" value="{$way}" />
+<input type="hidden" id="boci" name="boci" value="{$boci}" />
+<div class=" pgthree">
+    <div class="head">
+        <img class='zier' src="../addons/dq_2017/template/mobile/fourYearSrc/majiang/cao.png" alt="">
+    </div>
+    <div class="showbox">
+        <div class="clock" style="font-size:1em;line-height:1.6em;padding:0.5em 1em;">分享此链接到朋友圈，每1小时分享一次！分享5次后，关注公众号，将分享朋友圈的截图及姓名、手机号发给我们，就能参与抽奖，有机会获得大红包。</div>
+        <p class="title">分享此页面到朋友圈集赞</p>
+        <div>1258</div>
+        <div class="findbtn" id="showhelp" style="font-size: 0.9em">
+            分享到朋友圈集赞
+        </div>
+        <div class="findbtn" id="guanzhu">
+            关注获得十倍赞
+        </div>
+        <div class="biaodan">
+	        输入参与信息，必须留下电话才有资格参与获奖<br>
+		    姓名：<input type="text" name="name" /><br>
+		    电话：<input type="text" name="tel" id="tel" /><br>
+		    身份证：<input type="text" name="sfz" /><br>
+		    <input type="button" value="提交" id="tj" />
+    	</div>
+    </div>
+    <div class="showbox">
+	    <p class="title" style="font-size:14px;padding:10px 20px;"><b>关注微信</b>后，发送姓名手机号到平台，才能领取领取两万红包哦！</p>
+		 
+	</div>
+    <div class="fast" id="fast">
+        <img src="../addons/dq_2017/template/mobile/fourYearSrc/majiang/fastt.png" alt="">
+    </div>
+
+    <p style="font-size:14px;text-align: center;color:#FDF2B6;margin: 10px 2em;">参与说明：分享到朋友圈且每1小时进行一次分享并截图发给我们，即有机会获得大红包。</p>
+
+    <div class="share hidden" id="findhelp">
+        <img src="../addons/dq_2017/template/mobile/fourYearSrc/majiang/findhelp.png" alt="">
+    </div>
+    <div class="ruledet hidden" id="fastrule">
+        <div class="ruledec">
+            <h3>加速器说明</h3>
+            <p id="fastdec"></p>
+            <div class="close"><img src="../addons/dq_2017/template/mobile/fourYearSrc/majiang/close.png" alt=""></div>
+        </div>
+    </div>
+</div>
+
+<script src='../addons/dq_2017/template/mobile/fourYearSrc/js/jquery-1.11.3.js'></script>
+<script src="http://res.wx.qq.com/open/js/jweixin-1.2.0.js"></script>
+<script>
+    wx.config({
+        debug: false,
+        appId: "{$_W['account']['jssdkconfig']['appId']}",
+        timestamp: "{$_W['account']['jssdkconfig']['timestamp']}",
+        nonceStr: "{$_W['account']['jssdkconfig']['nonceStr']}",
+        signature: "{$_W['account']['jssdkconfig']['signature']}",
+        jsApiList: [
+            'checkJsApi',
+            'onMenuShareTimeline',
+            'onMenuShareAppMessage',
+            'hideMenuItems',
+            'showMenuItems',
+            'hideAllNonBaseMenuItem',
+            'showAllNonBaseMenuItem',
+            'translateVoice',
+            'startRecord',
+            'stopRecord',
+            'onVoiceRecordEnd',
+            'playVoice',
+            'onVoicePlayEnd',
+            'pauseVoice',
+            'stopVoice',
+            'uploadVoice',
+            'downloadVoice',
+            'chooseImage',
+            'previewImage',
+            'uploadImage',
+            'downloadImage',
+            'getNetworkType',
+            'openLocation',
+            'getLocation',
+            'hideOptionMenu',
+            'showOptionMenu',
+            'closeWindow',
+            'scanQRCode',
+            'chooseWXPay',
+            'openProductSpecificView',
+            'addCard',
+            'chooseCard',
+            'openCard'
+        ]
+    });
+    $('#showhelp').click(function(){
+        $('html,body').animate({'scrollTop':'0'},500);
+        $('#findhelp').removeClass('hidden');
+    });
+    $('#findhelp').click(function(){
+        $('#findhelp').addClass('hidden');
+    });
+    $('#guanzhu').click(function(){
+        alert('关注公众号并转发到朋友圈可获得十倍赞');
+    });
+    $('#fast').click(function(){
+        $('html,body').animate({'scrollTop':'0'},500);
+        $('#findhelp').removeClass('hidden');
+    });
+    $('#tj').click(function(){
+	    if($('#tel').val()){
+        	alert('信息提交成功，我门会与您电话联系');
+    	}else{
+	    	alert('必须输入手机号才能有机会获得红包');
+    	}
+    });
+
+   
+    wx.ready(function(){
+        // 分享给朋友
+        wx.onMenuShareAppMessage({
+            title: '分享朋友圈得两万红包', // 分享标题
+            link: '', // 分享链接
+            imgUrl: 'http://2nd.sagabuy.com/addons/dq_2017/template/mobile/fourYearSrc/images/two.png', // 分享图标
+            desc: '发送给10个微信好友就有可能得红包', // 分享描述
+            success: function (res) {
+
+            }
+        });
+        //分享到朋友圈
+        wx.onMenuShareTimeline({
+            title: '分享朋友圈得两万红包', // 分享标题
+            link: '', // 分享链接
+            imgUrl: 'http://2nd.sagabuy.com/addons/dq_2017/template/mobile/fourYearSrc/images/two.png', // 分享图标
+            success: function (res) {
+
+            }
+        });
+    });
+</script>
+
+</body>
+</html>
