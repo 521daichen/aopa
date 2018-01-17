@@ -65,7 +65,7 @@
         }
         .header{
             width:90%;
-            margin:0 auto;
+            margin:15px auto;
         }
         .yao{
             width:60%;
@@ -95,5 +95,115 @@
 <div class="tip">
     至奥帕MALL购物中心3F服务台，核销卡券后，现场随机领取现金红包一个，最高可得99元
 </div>
+<script src="http://res.wx.qq.com/open/js/jweixin-1.2.0.js"></script>
+<script src='../addons/dq_2017/template/mobile/newyear/js/jq.js'></script>
+<script>
+    wx.config({
+        debug: false,
+        appId: "{$_W['account']['jssdkconfig']['appId']}",
+        timestamp: "{$_W['account']['jssdkconfig']['timestamp']}",
+        nonceStr: "{$_W['account']['jssdkconfig']['nonceStr']}",
+        signature: "{$_W['account']['jssdkconfig']['signature']}",
+        jsApiList: [
+            'checkJsApi',
+            'onMenuShareTimeline',
+            'onMenuShareAppMessage',
+            'hideMenuItems',
+            'showMenuItems',
+            'hideAllNonBaseMenuItem',
+            'showAllNonBaseMenuItem',
+            'translateVoice',
+            'startRecord',
+            'stopRecord',
+            'onVoiceRecordEnd',
+            'playVoice',
+            'onVoicePlayEnd',
+            'pauseVoice',
+            'stopVoice',
+            'uploadVoice',
+            'downloadVoice',
+            'chooseImage',
+            'previewImage',
+            'uploadImage',
+            'downloadImage',
+            'getNetworkType',
+            'openLocation',
+            'getLocation',
+            'hideOptionMenu',
+            'showOptionMenu',
+            'closeWindow',
+            'scanQRCode',
+            'chooseWXPay',
+            'openProductSpecificView',
+            'addCard',
+            'chooseCard',
+            'openCard'
+        ]
+    });
+</script>
+<script>
+    var shake=4000,
+        last_update=0,
+        count=0,
+        x=y=z=last_x=last_y=last_z=0;
+    if(window.DeviceMotionEvent){
+        window.addEventListener("devicemotion",deviceMotionHandler,false);
+    }else{
+        alert("本设备不支持devicemotion事件");
+    }
+    console.log(new Date().valueOf());
+    function deviceMotionHandler(eventData){
+        var acceleration = eventData.accelerationIncludingGravity,
+            currTime=new Date().valueOf(),
+            diffTime=currTime-last_update;
+
+        if(diffTime>100){
+            last_update=currTime;
+            x=acceleration.x;
+            y=acceleration.y;
+            z=acceleration.z;
+            var speed=Math.abs(x+y+z-last_x-last_y-last_z)/diffTime*10000
+            var status=document.getElementById("status");
+            if(speed>shake){
+                count++;
+//                status.innerHTML = "你摇了中"+count+"次" ;
+                if(count>=20){
+                    sendCard()
+                }
+
+            }
+            last_x = x;
+            last_y = y;
+            last_z = z;
+        }
+    }
+    function sendCard() {
+        $.post('http://mswechat.mebaby.cn/app/index.php?i=2&c=entry&do=AopaCardSignInfo&m=dq_2017',
+            function (data) {
+                var resdata = JSON.parse(data);
+                wx.addCard({
+                    cardList: [
+                        {
+                            cardId: 'pSNdUwQGRQiDzeZFBWvdkXkHhzIU', //cardExt:"{'timestamp':'{$wxtimestamp}','signature':'{$wxsignature}'}"
+                            cardExt: '{"code": "","openid":"", "timestamp": "' + resdata.timestamp + '", "nonce_str":"' + resdata.noncestr + '","signature":"' + resdata.signature + '","outer_id": 1}'                            //cardExt: cardListStr
+                        }
+                    ], // 需要添加的卡券列表
+                    success: function (res) {
+                        var cardList = res.cardList;
+                        window.location.href = window.location.href + "&rand=" + Math.random();
+                    },
+                    cancel: function (res) {
+                        window.location.href = window.location.href + "&rand=" + Math.random();
+                        console.log("执行cancel");
+                    },
+                    fail: function (res) {
+                        window.location.href = window.location.href + "&rand=" + Math.random();
+                        console.log("执行fail");
+                    }
+                });
+            }
+        );
+    }
+</script>
 </body>
 </html>

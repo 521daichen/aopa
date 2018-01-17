@@ -10,6 +10,47 @@ defined('IN_IA') or exit('Access Denied');
 class Dq_2017ModuleSite extends WeModuleSite {
 
 
+
+
+    public function doMobileAopaCardSignInfo(){
+        global $_W;
+        $timestamp=$_W['timestamp'];
+        $api_ticket=$this->doMobileGetCardS();
+//        $card_id = 'pk_mF1vEIHfCLjML2t8b9hJhkU5Y';
+        $card_id = 'pSNdUwQGRQiDzeZFBWvdkXkHhzIU';
+        $nonce_str=$this->generateNonceStr();
+        $card = array(
+            $timestamp,
+            $api_ticket,
+            $card_id,
+            $nonce_str
+        );
+        sort($card,SORT_STRING);
+        $return='';
+        foreach($card as $k=>$v){
+            $return.= $v;
+        }
+        $sign=sha1($return);
+
+        $shareFun = $this->doMobileNewYearShare();
+
+        if($shareFun){
+            $res=array(
+                'status'=>1,
+                'timestamp'=>$timestamp,
+                'signature'=>$sign,
+                'nonce_str'=>$nonce_str,
+            );
+        }else{
+            $res=array(
+                'status'=>0,
+            );
+        }
+//        return $res;
+        echo json_encode($res);
+    }
+
+
     //拉卡券begin
 
     /**
