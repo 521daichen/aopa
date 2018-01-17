@@ -152,6 +152,10 @@
         .al{
             margin:0 auto;
             color: #fff;
+            text-align: center;
+        }
+        .hidden{
+            display: none;
         }
     </style>
 </head>
@@ -162,7 +166,7 @@
 <div class="yao">
     <img src="../addons/dq_2017/template/mobile/yaoyiyao/images/2.png" alt="" id="yaoyao">
 </div>
-<div class="al">听说幅度越大，摇出红包的几率越大~</div>
+<div class="al hidden" id="al">听说幅度越大，摇出红包的几率越大~</div>
 <div class="tip">
     至奥帕MALL购物中心3F服务台，核销卡券后，现场随机领取现金红包一个，最高可得99元
 </div>
@@ -240,6 +244,7 @@
             if(speed>shake){
                 count++;
                 $('#yaoyao').addClass('swing');
+                $('#al').addClass('hidden');
 //                status.innerHTML = "你摇了中"+count+"次" ;
                 if(count>=3){
                     count = 0;
@@ -281,7 +286,7 @@
                         }
                     });
                 }else{
-                    alert('没zhongjiang !');
+                    $('#al').removeClass('hidden');
                 }
 
             }
