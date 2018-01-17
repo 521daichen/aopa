@@ -173,6 +173,12 @@ class Dq_2017ModuleSite extends WeModuleSite {
 
     //摇一摇end
 
+    
+    public function doMobileBawangcanstore()
+    {
+        $url = 'http://mp.weixin.qq.com/bizmall/cardshelf?t=cardticket/shelf_list&biz=MzI0MzU2MjgyNA==&shelf_id=1&showwxpaytitle=1#wechat_redirect';
+        header('Location:'.$url);
+    }
 
     public function doMobileBawangcan()
     {
