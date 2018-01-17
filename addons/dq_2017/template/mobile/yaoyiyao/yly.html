@@ -238,7 +238,6 @@
 //                status.innerHTML = "你摇了中"+count+"次" ;
                 if(count>=3){
                     count = 0;
-                    $('#yaoyao').removeClass('swing');
                     sendCard();
                 }
 
@@ -251,7 +250,7 @@
     function sendCard() {
         $.post('http://apwechat.mebaby.cn/app/index.php?i=2&c=entry&do=AopaCardSignInfo&m=dq_2017',
             function (data) {
-
+                $('#yaoyao').removeClass('swing');
                 var resdata = JSON.parse(data);
 
                 if(resdata.status==1)
