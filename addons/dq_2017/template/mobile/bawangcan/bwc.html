@@ -2,9 +2,145 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1, user-scalable=no">
+    <meta name="renderer" content="webkit">
+    <meta content="telephone=no" name="format-detection">
+    <link rel="stylesheet" href="../addons/dq_2017/template/mobile/newyear/css/weui.css">
+    <link rel="stylesheet" href="../addons/dq_2017/template/mobile/newyear/css/main.css">
+    <title>摇一摇 赢开业红包</title>
+    <style>
+        html, body {
+            width: 100%;
+            -webkit-tap-highlight-color: transparent;
+            background: url(../addons/dq_2017/template/mobile/bawangcan/images/bg.png) no-repeat;
+            background-size: 100%;
 
+        }
+
+        body {
+            font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
+            font-size: 14px;
+            color: #000;
+            margin: 0;
+            padding: 0;
+            line-height: 1.5em;
+        }
+
+        img {
+            width: 100%;
+            vertical-align: bottom;
+            display: block;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            list-style: none;
+            text-decoration: none;
+        }
+
+        img {
+            width: 100%;
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        div {
+            box-sizing: border-box;
+        }
+
+        div:after {
+            content: '';
+            display: block;
+            clear: both;
+        }
+
+        div:before {
+            content: '';
+            display: table;
+        }
+        .btn{
+            width:30%;
+            margin:0 auto;
+            margin-top:40%;
+        }
+        .time{
+            width:50%;
+            margin:20px auto;
+            position:relative;
+
+        }
+        .num{
+            position: absolute;
+            top:0;
+            left: 0;
+        }
+    </style>
+</head>
+<body ontouchstart>
+<div class="btn">
+    <img src="../addons/dq_2017/template/mobile/bawangcan/images/btn1.png" alt="">
+</div>
+<div class="time">
+    <img src="../addons/dq_2017/template/mobile/bawangcan/images/time.png" alt="">
+    <div class="num">
+        <span>00</span>
+        <span>00</span>
+    </div>
+</div>
+<script src="http://res.wx.qq.com/open/js/jweixin-1.2.0.js"></script>
+<script src='../addons/dq_2017/template/mobile/newyear/js/jq.js'></script>
+<script>
+    wx.config({
+        debug: false,
+        appId: "{$_W['account']['jssdkconfig']['appId']}",
+        timestamp: "{$_W['account']['jssdkconfig']['timestamp']}",
+        nonceStr: "{$_W['account']['jssdkconfig']['nonceStr']}",
+        signature: "{$_W['account']['jssdkconfig']['signature']}",
+        jsApiList: [
+            'checkJsApi',
+            'onMenuShareTimeline',
+            'onMenuShareAppMessage',
+            'hideMenuItems',
+            'showMenuItems',
+            'hideAllNonBaseMenuItem',
+            'showAllNonBaseMenuItem',
+            'translateVoice',
+            'startRecord',
+            'stopRecord',
+            'onVoiceRecordEnd',
+            'playVoice',
+            'onVoicePlayEnd',
+            'pauseVoice',
+            'stopVoice',
+            'uploadVoice',
+            'downloadVoice',
+            'chooseImage',
+            'previewImage',
+            'uploadImage',
+            'downloadImage',
+            'getNetworkType',
+            'openLocation',
+            'getLocation',
+            'hideOptionMenu',
+            'showOptionMenu',
+            'closeWindow',
+            'scanQRCode',
+            'chooseWXPay',
+            'openProductSpecificView',
+            'addCard',
+            'chooseCard',
+            'openCard'
+        ]
+    });
+</script>
+<script>
+
+
+</script>
 </body>
 </html>
