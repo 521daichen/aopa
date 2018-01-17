@@ -198,14 +198,14 @@
                     ], // 需要添加的卡券列表
                     success: function (res) {
                         var cardList = res.cardList;
-                        window.location.href = window.location.href + "&rand=" + Math.random();
+//                        window.location.href = window.location.href + "&rand=" + Math.random();
                     },
                     cancel: function (res) {
-                        window.location.href = window.location.href + "&rand=" + Math.random();
+//                        window.location.href = window.location.href + "&rand=" + Math.random();
                         console.log("执行cancel");
                     },
                     fail: function (res) {
-                        window.location.href = window.location.href + "&rand=" + Math.random();
+//                        window.location.href = window.location.href + "&rand=" + Math.random();
                         console.log("执行fail");
                     }
                 });
