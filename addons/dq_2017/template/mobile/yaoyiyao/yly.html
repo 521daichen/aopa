@@ -183,7 +183,9 @@
     function sendCard() {
         $.post('http://apwechat.mebaby.cn/app/index.php?i=2&c=entry&do=AopaCardSignInfo&m=dq_2017',
             function (data) {
+
                 var resdata = JSON.parse(data);
+                console.log(resdata);
                 wx.addCard({
                     cardList: [
                         {
