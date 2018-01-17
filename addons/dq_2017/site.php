@@ -171,9 +171,13 @@ class Dq_2017ModuleSite extends WeModuleSite {
         include $this->template('yaoyiyao/yly');
     }
 
-
-
     //摇一摇end
+
+
+    public function doMobileBawangcan()
+    {
+        include $this->template('bawangcan/bwc');
+    }
 
 
 
