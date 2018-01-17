@@ -220,7 +220,7 @@
     }
     console.log(new Date().valueOf());
     function deviceMotionHandler(eventData){
-        $('#yaoyao').addClass('swing');
+
         var acceleration = eventData.accelerationIncludingGravity,
             currTime=new Date().valueOf(),
             diffTime=currTime-last_update;
@@ -234,6 +234,7 @@
             var status=document.getElementById("status");
             if(speed>shake){
                 count++;
+                $('#yaoyao').addClass('swing');
 //                status.innerHTML = "你摇了中"+count+"次" ;
                 if(count>=3){
                     count = 0;
