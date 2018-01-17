@@ -83,6 +83,72 @@
             line-height: 1.8em;
             padding:5px;
         }
+        @-webkit-keyframes swing {
+            20% {
+                -webkit-transform: rotate3d(0, 0, 1, 15deg);
+                transform: rotate3d(0, 0, 1, 15deg);
+            }
+
+            40% {
+                -webkit-transform: rotate3d(0, 0, 1, -10deg);
+                transform: rotate3d(0, 0, 1, -10deg);
+            }
+
+            60% {
+                -webkit-transform: rotate3d(0, 0, 1, 5deg);
+                transform: rotate3d(0, 0, 1, 5deg);
+            }
+
+            80% {
+                -webkit-transform: rotate3d(0, 0, 1, -5deg);
+                transform: rotate3d(0, 0, 1, -5deg);
+            }
+
+            100% {
+                -webkit-transform: rotate3d(0, 0, 1, 0deg);
+                transform: rotate3d(0, 0, 1, 0deg);
+            }
+        }
+
+        @keyframes swing {
+            20% {
+                -webkit-transform: rotate3d(0, 0, 1, 15deg);
+                transform: rotate3d(0, 0, 1, 15deg);
+            }
+
+            40% {
+                -webkit-transform: rotate3d(0, 0, 1, -10deg);
+                transform: rotate3d(0, 0, 1, -10deg);
+            }
+
+            60% {
+                -webkit-transform: rotate3d(0, 0, 1, 5deg);
+                transform: rotate3d(0, 0, 1, 5deg);
+            }
+
+            80% {
+                -webkit-transform: rotate3d(0, 0, 1, -5deg);
+                transform: rotate3d(0, 0, 1, -5deg);
+            }
+
+            100% {
+                -webkit-transform: rotate3d(0, 0, 1, 0deg);
+                transform: rotate3d(0, 0, 1, 0deg);
+            }
+        }
+
+        .swing {
+            -webkit-transform-origin: top center;
+            transform-origin: top center;
+            -webkit-animation-name: swing;
+            animation-name: swing;
+            -webkit-animation-duration: 1s;
+            animation-duration: 1s;
+            -webkit-animation-fill-mode: both;
+            animation-fill-mode: both;
+            -webkit-animation-iteration-count: 10;
+            animation-iteration-count: 10;
+        }
     </style>
 </head>
 <body ontouchstart>
@@ -90,7 +156,7 @@
     <img src="../addons/dq_2017/template/mobile/yaoyiyao/images/1.png" alt="">
 </div>
 <div class="yao">
-    <img src="../addons/dq_2017/template/mobile/yaoyiyao/images/2.png" alt="">
+    <img src="../addons/dq_2017/template/mobile/yaoyiyao/images/2.png" alt="" id="yaoyao">
 </div>
 <div class="tip">
     至奥帕MALL购物中心3F服务台，核销卡券后，现场随机领取现金红包一个，最高可得99元
@@ -166,6 +232,7 @@
             var speed=Math.abs(x+y+z-last_x-last_y-last_z)/diffTime*10000
             var status=document.getElementById("status");
             if(speed>shake){
+                $('#yaoyao').addclass('swing');
                 count++;
 //                status.innerHTML = "你摇了中"+count+"次" ;
                 if(count>=3){
