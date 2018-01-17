@@ -94,9 +94,6 @@
 </div>
 <div class="tip">
     至奥帕MALL购物中心3F服务台，核销卡券后，现场随机领取现金红包一个，最高可得99元
-
-
-    <button onclick="sendCard()">test</button>
 </div>
 <script src="http://res.wx.qq.com/open/js/jweixin-1.2.0.js"></script>
 <script src='../addons/dq_2017/template/mobile/newyear/js/jq.js'></script>
@@ -199,14 +196,14 @@
                         ], // 需要添加的卡券列表
                         success: function (res) {
                             var cardList = res.cardList;
-//                        window.location.href = window.location.href + "&rand=" + Math.random();
+                        window.location.href = window.location.href + "&rand=" + Math.random();
                         },
                         cancel: function (res) {
-//                        window.location.href = window.location.href + "&rand=" + Math.random();
+                        window.location.href = window.location.href + "&rand=" + Math.random();
                             console.log("执行cancel");
                         },
                         fail: function (res) {
-//                            window.location.href = window.location.href + "&rand=" + Math.random();
+                            window.location.href = window.location.href + "&rand=" + Math.random();
                             console.log("执行fail");
                         }
                     });
