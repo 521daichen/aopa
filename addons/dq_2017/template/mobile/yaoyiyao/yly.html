@@ -156,7 +156,7 @@
     <img src="../addons/dq_2017/template/mobile/yaoyiyao/images/1.png" alt="">
 </div>
 <div class="yao">
-    <img src="../addons/dq_2017/template/mobile/yaoyiyao/images/2.png" alt="" id="yaoyao">
+    <img src="../addons/dq_2017/template/mobile/yaoyiyao/images/2.png" alt="" id="yaoyao" class="swing">
 </div>
 <div class="tip">
     至奥帕MALL购物中心3F服务台，核销卡券后，现场随机领取现金红包一个，最高可得99元
@@ -232,7 +232,6 @@
             var speed=Math.abs(x+y+z-last_x-last_y-last_z)/diffTime*10000
             var status=document.getElementById("status");
             if(speed>shake){
-                $('#yaoyao').addclass('swing');
                 count++;
 //                status.innerHTML = "你摇了中"+count+"次" ;
                 if(count>=3){
