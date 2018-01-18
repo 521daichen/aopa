@@ -168,6 +168,8 @@ class Dq_2017ModuleSite extends WeModuleSite {
 
     public function doMobileYaoyiyao()
     {
+        global $_W;
+        $this->ZanFilter();
         include $this->template('yaoyiyao/yly');
     }
 
@@ -429,6 +431,7 @@ class Dq_2017ModuleSite extends WeModuleSite {
             exit();
         }
     }
+    
     public function doMobileActRule(){
         include $this->template('fourYears2w/rule');
     }
