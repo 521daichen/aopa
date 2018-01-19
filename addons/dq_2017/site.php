@@ -26,7 +26,7 @@ class Dq_2017ModuleSite extends WeModuleSite {
         $timestamp=$_W['timestamp'];
         $api_ticket=$this->doMobileGetCardS();
 //        $card_id = 'pk_mF1vEIHfCLjML2t8b9hJhkU5Y';
-        $card_id = 'pSNdUwQGRQiDzeZFBWvdkXkHhzIU';
+        $card_id = 'pSNdUwa8_uzlKsiZlLdfwL2bckr8';
         $nonce_str=$this->generateNonceStr();
         $card = array(
             $timestamp,
@@ -431,7 +431,7 @@ class Dq_2017ModuleSite extends WeModuleSite {
             exit();
         }
     }
-    
+
     public function doMobileActRule(){
         include $this->template('fourYears2w/rule');
     }
